@@ -1,6 +1,8 @@
 {
-    "name": "",
-    "animal": "",
-    "sin": "Greed",
-    "description": ""
+    "name":"",
+    "animal":"Dragon",
+    "sin":"Greed",
+    "description":"",
+    "weapon":"Warhammer",
+    "colour":"Green"
 }

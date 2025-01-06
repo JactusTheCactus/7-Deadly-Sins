@@ -1,6 +1,8 @@
 {
-    "name": "",
-    "animal": "",
-    "sin": "Pride",
-    "description": ""
+    "name":"",
+    "animal":"Phoenix",
+    "sin":"Pride",
+    "description":"",
+    "weapon":"Sword",
+    "colour":"Yellow"
 }

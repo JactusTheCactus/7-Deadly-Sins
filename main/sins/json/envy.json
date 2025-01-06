@@ -1,6 +1,8 @@
 {
-    "name": "",
-    "animal": "Snake",
-    "sin": "Envy",
-    "description": ""
+    "name":"",
+    "animal":"Gorgon",
+    "sin":"Envy",
+    "description":"",
+    "weapon":"Staff",
+    "colour":"Blue"
 }

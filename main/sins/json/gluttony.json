@@ -1,6 +1,8 @@
 {
-    "name": "",
-    "animal": "",
-    "sin": "Gluttony",
-    "description": ""
+    "name":"",
+    "animal":"Hydra",
+    "sin":"Gluttony",
+    "description":"",
+    "weapon":"Battleaxe",
+    "colour":"Purple"
 }

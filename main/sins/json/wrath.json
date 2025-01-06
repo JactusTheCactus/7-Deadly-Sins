@@ -1,6 +1,8 @@
 {
-    "name": "",
-    "animal": "",
-    "sin": "Wrath",
-    "description": ""
+    "name":"",
+    "animal":"Kraken",
+    "sin":"Wrath",
+    "description":"",
+    "weapon":"Chain Whip",
+    "colour":"Red"
 }

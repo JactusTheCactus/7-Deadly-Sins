@@ -17,11 +17,13 @@ def json_to_html(json_file, html_file):
     else:
         name = ""
     if data["animal"] != "":
-        animal = f"{data["animal"]}'s "
+        animal = f"{data["animal"]} "
     else:
         animal = ""
     sin = data["sin"]
     description = data["description"]
+    weapon = data["weapon"]
+    colour = data["colour"]
     fullName = f"{name}The {animal}Sin of {sin}"
 
     html_content = f"""<!DOCTYPE html>
@@ -34,11 +36,12 @@ def json_to_html(json_file, html_file):
         font-family: Arial, sans-serif;
         margin: 0rem 5rem 0rem;
         font-size: 1.5rem;
+        word-wrap: break-word;
+        font-weight: bold;
     }}
     .title {{
         font-size: 5rem;
         text-decoration: underline;
-        font-weight: bold;
     }}
     </style>
     <title>{escape(sin)}</title>
@@ -49,6 +52,9 @@ def json_to_html(json_file, html_file):
             {escape(fullName)}
         </p>
         <p>
+            Weapon: <u>{escape(weapon)}</u>
+            <br>
+            Colour: <u>{escape(colour)}</u>
             {escape(description)}
         </p>
         <b><a href='../../home/home.html'>Home</a></b>

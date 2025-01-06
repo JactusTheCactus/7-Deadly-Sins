@@ -1,6 +1,8 @@
 {
-    "name": "",
-    "animal": "Hare",
-    "sin": "Lust",
-    "description": ""
+    "name":"",
+    "animal":"Siren",
+    "sin":"Lust",
+    "description":"",
+    "weapon":"Daggers",
+    "colour":"Pink"
 }
