@@ -63,7 +63,7 @@ def json_to_html(json_file, html_file):
     with open(html_file, 'w', encoding='utf-8') as f:
         f.write(html_content)
 
-sins = Path("sins/json")
+sins = Path("main/sins/json")
 sinJSON = [item.name for item in sins.iterdir()]
 sinHTML =  [item[:-4] + "html" for item in sinJSON]
 
@@ -98,17 +98,17 @@ home_html += """
 </html>
 """
 
-with open("home/home.html", "w", encoding="utf-8") as file:
+with open("main/home/home.html", "w", encoding="utf-8") as file:
     file.write(home_html)
 
 def runloop():
     for i in range(len(sinJSON)):
-        json_file = f"sins/json/{sinJSON[i]}"
-        html_file = f"sins/html/{sinHTML[i]}"
+        json_file = f"main/sins/json/{sinJSON[i]}"
+        html_file = f"main/sins/html/{sinHTML[i]}"
         json_to_html(json_file, html_file)
     
     # Write the home page separately after generating the sin pages
-    with open("home/home.html", "w", encoding="utf-8") as file:
+    with open("main/home/home.html", "w", encoding="utf-8") as file:
         file.write(home_html)
 
 runloop()
