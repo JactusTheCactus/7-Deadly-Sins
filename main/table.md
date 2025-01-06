@@ -1,4 +1,4 @@
-> |Name|Sin|Mark|Weapon|Colour|Power|Race|
+> |__Name__|__Sin__|__Mark__|__Weapon__|__Colour__|__Power__|__Race__|
 > |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 > |___[None]___|Envy|Gorgon|Staff|Blue|Mimic|Changeling|
 > |___[None]___|Gluttony|Hydra|Battleaxe|Purple|Power Absorbtion|___[None]___|
