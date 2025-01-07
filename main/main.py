@@ -58,7 +58,6 @@ def json_to_html(json_file, html_file):
     """
     html_content = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', html_content)
     html_content = re.sub(r'\*(.*?)\*', r'<i>\1</i>', html_content)
-
     # Write the HTML content to a file
     with open(html_file, 'w', encoding='utf-8') as f:
         f.write(html_content)
