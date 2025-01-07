@@ -142,9 +142,10 @@ def json_to_md_table(directory):
     # Create the markdown table header
     table_header = "|Name|Sin|Mark|Weapon|Colour|Power|Race|\n"
     table_header += "|:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n"
+    table_footer = "\n[Home]()"
 
     # Combine header and rows to form the full markdown content
-    md_content = f"There are __Seven Deadly Sins__. Here is a table:\n\n{table_header}{'\n'.join(table_rows)}"
+    md_content = f"There are __Seven Deadly Sins__. Here is a table:\n\n{table_header}{'\n'.join(table_rows)}\n\n{table_footer}"
 
     # Use the createfile function to save the markdown content
     createfile("./", "README", "md", md_content)
