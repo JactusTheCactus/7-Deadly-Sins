@@ -57,7 +57,10 @@ def json_to_html(json_file, html_file):
             Weapon: <u>{escape(weapon)}</u>
             <br>
             Colour: <u>{escape(colour)}</u>
-            {escape(description)}
+            <br>
+            Power: {escape(power)}</u>
+            <br>
+            Race: {escape(race)}</u>
         </p>
         <b><a href='../../home/home.html'>Home</a></b>
     </body>
