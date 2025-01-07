@@ -136,12 +136,12 @@ def json_to_md_table(directory):
             colour = data.get('colour')
             power = data.get('power')
             race = data.get('race')
-            row = f"> |{name}|{sin}|{animal}|{weapon}|{colour}|{power}|{race}|"
+            row = f"|{name}|{sin}|{animal}|{weapon}|{colour}|{power}|{race}|"
             table_rows.append(row)
 
     # Create the markdown table header
-    table_header = "> |Name|Sin|Mark|Weapon|Colour|Power|Race|\n"
-    table_header += "> |:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n"
+    table_header = "|Name|Sin|Mark|Weapon|Colour|Power|Race|\n"
+    table_header += "|:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n"
 
     # Combine header and rows to form the full markdown content
     md_content = table_header + "\n".join(table_rows)
