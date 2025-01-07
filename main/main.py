@@ -5,18 +5,18 @@ import time
 from html import escape
 import os
 errorMessage = []
+name = data["name"]
+animal = data["animal"]
+sin = data["sin"]
+weapon = data["weapon"]
+colour = data["colour"]
+power = data["power"]
+race = data["race"]
 # Function to convert JSON to HTML
 def json_to_html(json_file, html_file):
     # Open and load the JSON data
     with open(json_file, 'r', encoding='utf-8') as f:
         data = json.load(f)
-    name = data["name"]
-    animal = data["animal"]
-    sin = data["sin"]
-    weapon = data["weapon"]
-    colour = data["colour"]
-    power = data["power"]
-    race = data["race"]
     fullName = f"{name}, The {animal} Sin of {sin}"
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
@@ -108,13 +108,6 @@ def json_to_md_table(directory):
     for json_file in json_files:
         with open(f"{directory}/{json_file}", "r") as file:
             data = json.load(file)
-            name = data.get('name')
-            sin = data.get('sin')
-            animal = data.get('animal')
-            weapon = data.get('weapon')
-            colour = data.get('colour')
-            power = data.get('power')
-            race = data.get('race')
             row = f"|{name}|{sin}|{animal}|{weapon}|{colour}|{power}|{race}|"
             table_rows.append(row)
     # Create the markdown table header
