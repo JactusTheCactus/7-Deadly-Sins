@@ -147,7 +147,7 @@ def json_to_md_table(directory):
     md_content = f"There are __Seven Deadly Sins__. Here is a table:\n\n{table_header}{'\n'.join(table_rows)}"
 
     # Use the createfile function to save the markdown content
-    createfile("main", "README", "md", md_content)
+    createfile("./", "README", "md", md_content)
 
 json_to_md_table('main/sins/json')
 
