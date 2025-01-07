@@ -24,6 +24,8 @@ def json_to_html(json_file, html_file):
     description = data["description"]
     weapon = data["weapon"]
     colour = data["colour"]
+    power = data["power"]
+    race = data["race"]
     fullName = f"{name}The {animal}Sin of {sin}"
 
     html_content = f"""<!DOCTYPE html>
@@ -55,6 +57,11 @@ def json_to_html(json_file, html_file):
             Weapon: <u>{escape(weapon)}</u>
             <br>
             Gear Colour: <u>{escape(colour)}</u>
+            <br>
+            Power: <u>{escape(power)}</u>
+            <br>
+            Race: <u>{escape(race)}</u>
+            <br>
             {escape(description)}
         </p>
         <b><a href='../../home/home.html'>Home</a></b>
