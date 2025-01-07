@@ -13,20 +13,14 @@ def json_to_html(json_file, html_file):
     with open(json_file, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    if data["name"] != "":
-        name = f"{data["name"]}, "
-    else:
-        name = ""
-    if data["animal"] != "":
-        animal = f"{data["animal"]} "
-    else:
-        animal = ""
+    name = data["name"]
+    animal = data["animal"]
     sin = data["sin"]
     weapon = data["weapon"]
     colour = data["colour"]
     power = data["power"]
     race = data["race"]
-    fullName = f"{name}The {animal}Sin of {sin}"
+    fullName = f"{name}, The {animal} Sin of {sin}"
 
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
