@@ -3,6 +3,7 @@ from pathlib import Path
 import re
 import time
 from html import escape
+import os
 
 errorMessage = []
 
@@ -21,9 +22,11 @@ def json_to_html(json_file, html_file):
     else:
         animal = ""
     sin = data["sin"]
-    description = data["description"]
     weapon = data["weapon"]
     colour = data["colour"]
+    power = data["power"]
+    race = data["race"]
+
     fullName = f"{name}The {animal}Sin of {sin}"
 
     html_content = f"""<!DOCTYPE html>
@@ -55,7 +58,10 @@ def json_to_html(json_file, html_file):
             Weapon: <u>{escape(weapon)}</u>
             <br>
             Colour: <u>{escape(colour)}</u>
-            {escape(description)}
+            <br>
+            Power: <u>{escape(power)}</u>
+            <br>
+            Race:  <u>{escape(race)}</u>
         </p>
         <b><a href='../../home/home.html'>Home</a></b>
     </body>
@@ -107,14 +113,50 @@ home_html += """
 with open("main/home/home.html", "w", encoding="utf-8") as file:
     file.write(home_html)
 
-def runloop():
-    for i in range(len(sinJSON)):
-        json_file = f"main/sins/json/{sinJSON[i]}"
-        html_file = f"main/sins/html/{sinHTML[i]}"
-        json_to_html(json_file, html_file)
-    
-    # Write the home page separately after generating the sin pages
-    with open("main/home/home.html", "w", encoding="utf-8") as file:
-        file.write(home_html)
+def createfile(directory,name,type,content):
+	name = f"{name}.{type}"
+	with open(f"{directory}/{name}", "w") as file:
+		file.write(content)
 
-runloop()
+def json_to_md_table(directory):
+    # List all .json files in the directory
+    json_files = [f for f in os.listdir(directory) if f.endswith('.json')]
+
+    # Initialize a list to store rows for the markdown table
+    table_rows = []
+
+    # Process each json file
+    for json_file in json_files:
+        with open(f"{directory}/{json_file}", "r") as file:
+            data = json.load(file)
+
+            name = data.get('name')
+            sin = data.get('sin')
+            animal = data.get('animal')
+            weapon = data.get('weapon')
+            colour = data.get('colour')
+            power = data.get('power')
+            race = data.get('race')
+            row = f"> |{name}|{sin}|{animal}|{weapon}|{colour}|{power}|{race}|"
+            table_rows.append(row)
+
+    # Create the markdown table header
+    table_header = "> |Name|Sin|Mark|Weapon|Colour|Power|Race|\n"
+    table_header += "> |:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n"
+
+    # Combine header and rows to form the full markdown content
+    md_content = table_header + "\n".join(table_rows)
+
+    # Use the createfile function to save the markdown content
+    createfile("main", "table", "md", md_content)
+
+json_to_md_table('main/sins/json')
+
+for i in range(len(sinJSON)):
+    json_file = f"main/sins/json/{sinJSON[i]}"
+    html_file = f"main/sins/html/{sinHTML[i]}"
+    json_to_html(json_file, html_file)
+
+# Write the home page separately after generating the sin pages
+with open("main/home/home.html", "w", encoding="utf-8") as file:
+    file.write(home_html)

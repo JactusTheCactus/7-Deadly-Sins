@@ -2,7 +2,8 @@
     "name":"",
     "animal":"Phoenix",
     "sin":"Pride",
-    "description":"",
     "weapon":"Sword",
-    "colour":"Yellow"
+    "colour":"Yellow",
+    "power":"Immolation",
+    "race":"Elf"
 }

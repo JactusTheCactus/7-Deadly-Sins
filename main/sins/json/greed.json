@@ -2,7 +2,8 @@
     "name":"",
     "animal":"Dragon",
     "sin":"Greed",
-    "description":"",
     "weapon":"Warhammer",
-    "colour":"Green"
+    "colour":"Green",
+    "power":"Ferrokinesis",
+    "race":""
 }

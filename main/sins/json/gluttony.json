@@ -2,7 +2,8 @@
     "name":"",
     "animal":"Hydra",
     "sin":"Gluttony",
-    "description":"",
     "weapon":"Battleaxe",
-    "colour":"Purple"
+    "colour":"Purple",
+    "power":"Absorbtion",
+    "race":""
 }

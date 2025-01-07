@@ -2,7 +2,8 @@
     "name":"",
     "animal":"Sphinx",
     "sin":"Sloth",
-    "description":"",
     "weapon":"Mace",
-    "colour":"Orange"
+    "colour":"Orange",
+    "power":"Paralysis",
+    "race":"Golem"
 }
