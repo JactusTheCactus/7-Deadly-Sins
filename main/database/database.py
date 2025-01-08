@@ -21,6 +21,18 @@ cursor.execute(create_table_query)
 
 # Step 5: Commit changes and close the connection
 connection.commit()
-connection.close()
 
 print("Database and table created successfully!")
+
+# Query to select all rows from the table
+cursor.execute('SELECT * FROM users')
+
+# Fetch all rows from the executed query
+rows = cursor.fetchall()
+
+# Print the rows
+for row in rows:
+    print(row)
+
+# Close the connection
+connection.close()
