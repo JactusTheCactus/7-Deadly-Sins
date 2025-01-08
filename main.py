@@ -4,38 +4,43 @@ import re
 from html import escape
 import os
 
-errorMessage = []
-
 # Mapping of ranks based on sex
 rank_mapping = {
     'Imperatore': {
         'm': 'Imperator', 
         'f': 'Imperatrix', 
-        'n': 'Imperatore'},
+        'n': 'Imperatore'
+        },
     'Venatorium': {
         'm': 'Venator', 
         'f': 'Venatrix', 
-        'n': 'Venatorium'},
+        'n': 'Venatorium'
+        },
     'Ferratorium': {
         'm': 'Ferrator', 
         'f': 'Ferrata', 
-        'n': 'Ferratorium'},
+        'n': 'Ferratorium'
+        },
     'Dominum': {
         'm': 'Dominus', 
         'f': 'Domina', 
-        'n': 'Dominum'},
+        'n': 'Dominum'
+        },
     'Luminorium': {
         'm': 'Luminor', 
         'f': 'Luminata', 
-        'n': 'Luminorium'},
+        'n': 'Luminorium'
+        },
     'Exaltum': {
         'm': 'Exaltus', 
         'f': 'Exalta', 
-        'n': 'Exaltum'},
+        'n': 'Exaltum'
+        },
     'Bellatorium': {
         'm': 'Bellator', 
         'f': 'Bellatrix', 
-        'n': 'Bellatorium'}
+        'n': 'Bellatorium'
+        }
 }
 
 def replace_rank_with_gender(data):
@@ -162,7 +167,6 @@ def yaml_to_md_table(data, yaml_file, html_file):
         species = details.get("species", "Unknown")
         sex = details.get("sex", "Unknown")
         rank = details.get("rank", "Unknown")
-        # Only add the row once
         row = f"|{name}|{sin_type}|{animal}|{weapon}|{colour}|{power}|{species}|{rank}|"
         table_rows.append(row)
 
