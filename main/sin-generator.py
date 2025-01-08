@@ -62,10 +62,10 @@ def json_to_html(combined_json_file, output_directory):
         html_content = re.sub(r'\*(.*?)\*', r'<i>\1</i>', html_content)
 
         # Define the output file name and path
-        html_file = f"{output_directory}/{name.lower().replace(' ', '_')}.html"
+        html_file = f"{output_directory}/{sin.lower().replace(' ', '_')}.html"
         
         # Write the HTML content to the file
         with open(html_file, 'w', encoding='utf-8') as f:
             f.write(html_content)
 
-        print(f"HTML file generated for {name}: {html_file}")
+        print(f"HTML file generated for {sin}: {html_file}")
