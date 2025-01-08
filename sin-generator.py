@@ -4,9 +4,10 @@ from html import escape
 
 def generate(combined_json_file, output_directory):
     # Open and parse the combined JSON file
+    print("Generated files:")
     with open(combined_json_file, 'r', encoding='utf-8') as f:
         data = json.load(f)
-    
+    sin_list = []
     # Iterate through each character in the JSON array
     for character in data:
         # Extract character details
@@ -62,12 +63,16 @@ def generate(combined_json_file, output_directory):
         html_content = re.sub(r'\*(.*?)\*', r'<i>\1</i>', html_content)
 
         # Define the output file name and path
-        html_file = f"{output_directory}/{sin.lower().replace(' ', '_')}.html"
+        file_name = f"{sin.lower().replace(' ', '_')}.html"
+        html_file = f"{output_directory}/{file_name}"
+        sin_list.append(file_name)
         
         # Write the HTML content to the file
         with open(html_file, 'w', encoding='utf-8') as f:
             f.write(html_content)
 
-        print(f"HTML file generated for {sin}: {html_file}")
+    for i in range(len(sin_list)):
+        print(sin_list[i])
+    print(f"In {output_directory}")
 
-generate("sins/sins.json","sins/html")
+generate("sins/sins.json","sins/sins")
