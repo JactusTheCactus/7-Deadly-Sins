@@ -124,7 +124,7 @@ def json_to_md_table(directory):
         
     table_header = "|Name|Sin|Mark|Weapon|Colour|Power|Race|\n"
     table_header += "|:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n"
-    table_footer = "\n![Home](home.html)"
+    table_footer = "\n[Home](home.html)"
     md_content = f"There are __Seven Deadly Sins__. Here is a table:\n\n{table_header}{'\n'.join(table_rows)}\n\n{table_footer}"
     createfile("./", "README", "md", md_content)
 json_to_md_table("sins/sins.json")
@@ -132,5 +132,5 @@ for i in range(7):
     json_file = f"sins/sins.json"
     html_file = f"sins/sins/{sinHTML[i]}"
     json_to_html(json_file, html_file)
-with open("sins/home.html", "w", encoding="utf-8") as file:
+with open("home.html", "w", encoding="utf-8") as file:
     file.write(home_html)
