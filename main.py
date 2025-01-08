@@ -29,7 +29,10 @@ def yaml_to_html(yaml_file, html_file):
         species = data.get("species")
         if species is None:
              species = ""
-    fullName = f"{name}, The {animal} Sin of {sin}"
+        rank = data.get("rank")
+        if rank is None:
+             rank = ""
+    fullName = f"{name}, The {animal} Sin of {sin}, {rank} of The Seven Deadly Sins"
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -111,7 +114,7 @@ def yaml_to_md_table(yaml_data,directory,sin_key):
         data_dict = yaml.safe_load(file)
     
     table_rows = []
-    for key, data in data_dict.items():
+    for sin_key, yaml_data in data_dict.items():
         sin_data = yaml_data.get(sin_key, {})
         name = sin_data.get("name", "")
         animal = sin_data.get("animal", "")
@@ -120,11 +123,11 @@ def yaml_to_md_table(yaml_data,directory,sin_key):
         colour = sin_data.get("colour", "")
         power = sin_data.get("power", "")
         species = sin_data.get("species", "")
-        row = f"|{name}|{sin}|{animal}|{weapon}|{colour}|{power}|{species}|"
+        rank = sin_data.get("rank", "")
+        row = f"|{name}|{sin}|{animal}|{weapon}|{colour}|{power}|{species}|{rank}|"
         table_rows.append(row)
         
-    table_header = "|Name|Sin|Mark|Weapon|Colour|Power|species|\n"
-    table_header += "|:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n"
+    table_header = "|Name|Sin|Mark|Weapon|Colour|Power|Species|Rank|\n|:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n"
     table_footer = "\n[Home](home.html)"
     md_content = f"There are __Seven Deadly Sins__. Here is a table:\n\n{table_header}{'\n'.join(table_rows)}\n\n{table_footer}"
     createfile("./", "README", "md", md_content)

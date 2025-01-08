@@ -96,3 +96,4 @@ sinHTML =  [
 for sin in sinHTML:
     html_file = f"docs/html5up-hyperspace/sin/{sin}.html"
     yaml_to_html(data, sin, html_file)
+
