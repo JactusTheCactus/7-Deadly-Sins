@@ -2,7 +2,7 @@ import json
 import re
 from html import escape
 
-def json_to_html(combined_json_file, output_directory):
+def generate(combined_json_file, output_directory):
     # Open and parse the combined JSON file
     with open(combined_json_file, 'r', encoding='utf-8') as f:
         data = json.load(f)
@@ -69,3 +69,5 @@ def json_to_html(combined_json_file, output_directory):
             f.write(html_content)
 
         print(f"HTML file generated for {sin}: {html_file}")
+
+generate("sins.json")
