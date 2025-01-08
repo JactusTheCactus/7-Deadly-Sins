@@ -17,8 +17,8 @@ rank_mapping = {
         'f': 'Venatrix', 
         'n': 'Venatorium'},
     'Ferratorium': {
-        'm': 'Ferro', 
-        'f': 'Ferroa', 
+        'm': 'Ferrator', 
+        'f': 'Ferrata', 
         'n': 'Ferratorium'},
     'Dominum': {
         'm': 'Dominus', 
@@ -26,7 +26,7 @@ rank_mapping = {
         'n': 'Dominum'},
     'Luminorium': {
         'm': 'Luminor', 
-        'f': 'Luminora', 
+        'f': 'Luminata', 
         'n': 'Luminorium'},
     'Exaltum': {
         'm': 'Exaltus', 
