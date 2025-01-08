@@ -4,7 +4,7 @@ from html import escape
 import re
 from pathlib import Path
 
-def json_to_html(json_file, html_file):
+def json_to_html(json_data, sin_key, html_file):
     sin_data = json_data.get(sin_key, {})
     name = sin_data.get("name","")
     animal = sin_data.get("animal","")
@@ -73,6 +73,10 @@ def createfile(directory,name,type,content):
 	with open(f"{directory}/{name}", "w") as file:
 		file.write(content)
 
+json_file = "sins/sins.json"
+with open(json_file, 'r', encoding='utf-8') as f:
+    data = json.load(f)
+
 sinHTML =  [
      "envy",
      "gluttony",
@@ -82,9 +86,13 @@ sinHTML =  [
      "sloth",
      "wrath"
      ]
-for i in range(7):
-    json_file = f"sins/sins.json"
-    html_file = f"docs/html5up-hyperspace/sin/{sinHTML[i]}.html"
-    json_to_html(json_file, html_file)
-    with open(json_file, 'r', encoding='utf-8') as f:
-          data = json.load(f)
+for sin in sinHTML:
+    html_file = f"docs/html5up-hyperspace/sin/{sin}.html"
+    json_to_html(data, sin, html_file)
+
+# for i in range(7):
+#     json_file = f"sins/sins.json"
+#     html_file = f"docs/html5up-hyperspace/sin/{sinHTML[i]}.html"
+#     json_to_html(json_file, html_file)
+#     with open(json_file, 'r', encoding='utf-8') as f:
+#           data = json.load(f)
