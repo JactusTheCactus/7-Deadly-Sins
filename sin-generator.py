@@ -70,4 +70,4 @@ def generate(combined_json_file, output_directory):
 
         print(f"HTML file generated for {sin}: {html_file}")
 
-generate("sins.json")
+generate("sins/sins.json","sins/html")
