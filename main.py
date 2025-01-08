@@ -100,7 +100,7 @@ home_html += """
 </body>
 </html>
 """
-with open("sins/home.html", "w", encoding="utf-8") as file:
+with open("home.html", "w", encoding="utf-8") as file:
     file.write(home_html)
 def createfile(directory,name,type,content):
 	name = f"{name}.{type}"
