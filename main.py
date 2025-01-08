@@ -1,37 +1,50 @@
 import yaml
 from pathlib import Path
 import re
-import time
 from html import escape
 import os
+
 errorMessage = []
+
+# Mapping of ranks based on sex
+rank_mapping = {
+    'Imperatore': {'m': 'Imperator', 'f': 'Imperatrix', 'neutral': 'Imperatore'},
+    'Venatorium': {'m': 'Venator', 'f': 'Venatrix', 'neutral': 'Venatorium'},
+    'Ferratorium': {'m': 'Ferro', 'f': 'Ferroa', 'neutral': 'Ferratorium'},
+    'Dominum': {'m': 'Dominus', 'f': 'Domina', 'neutral': 'Dominum'},
+    'Luminorium': {'m': 'Luminor', 'f': 'Luminora', 'neutral': 'Luminorium'},
+    'Exaltum': {'m': 'Exaltus', 'f': 'Exalta', 'neutral': 'Exaltum'},
+    'Bellatorium': {'m': 'Bellator', 'f': 'Bellatrix', 'neutral': 'Bellatorium'}
+}
+
+def replace_rank_with_gender(data):
+    for sin, details in data.items():
+        sex = details.get("sex", "")
+        rank = details.get("rank", "")
+        
+        if rank:
+            # Determine the gendered or neutral rank
+            if sex == 'm':
+                details['rank'] = rank_mapping.get(rank, {}).get('m', rank)
+            elif sex == 'f':
+                details['rank'] = rank_mapping.get(rank, {}).get('f', rank)
+            else:
+                details['rank'] = rank_mapping.get(rank, {}).get('neutral', rank)
+    
+    return data
+
 def yaml_to_html(yaml_file, html_file):
     with open(yaml_file, 'r', encoding='utf-8') as f:
         data = yaml.safe_load(f)
-        name = data.get("name")
-        if name is None:
-             name = ""
-        animal = data.get("animal")
-        if animal is None:
-             animal = ""
-        sin = data.get("sin")
-        if sin is None:
-             sin = ""
-        weapon = data.get("weapon")
-        if weapon is None:
-             weapon = ""
-        colour = data.get("colour")
-        if colour is None:
-             colour = ""
-        power = data.get("power")
-        if power is None:
-             power = ""
-        species = data.get("species")
-        if species is None:
-             species = ""
-        rank = data.get("rank")
-        if rank is None:
-             rank = ""
+        name = data.get("name", "")
+        animal = data.get("animal", "")
+        sin = data.get("sin", "")
+        weapon = data.get("weapon", "")
+        colour = data.get("colour", "")
+        power = data.get("power", "")
+        species = data.get("species", "")
+        rank = data.get("rank", "")
+    
     fullName = f"{name}, The {animal} Sin of {sin}, {rank} of The Seven Deadly Sins"
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
@@ -63,9 +76,9 @@ def yaml_to_html(yaml_file, html_file):
             <br>
             Colour: <u>{escape(colour)}</u>
             <br>
-            Power: {escape(power)}</u>
+            Power: {escape(power)}
             <br>
-            species: {escape(species)}</u>
+            Species: {escape(species)}
         </p>
         <b><a href='../../home/home.html'>Home</a></b>
     </body>
@@ -75,7 +88,8 @@ def yaml_to_html(yaml_file, html_file):
     html_content = re.sub(r'\*(.*?)\*', r'<i>\1</i>', html_content)
     with open(html_file, 'w', encoding='utf-8') as f:
         f.write(html_content)
-sinHTML =  [item.name for item in Path("sins/sins").iterdir()]
+
+sinHTML = [item.name for item in Path("sins/sins").iterdir()]
 home_html = f"""
 <!DOCTYPE html>
 <html lang="en">
@@ -105,10 +119,12 @@ home_html += """
 """
 with open("home.html", "w", encoding="utf-8") as file:
     file.write(home_html)
-def createfile(directory,name,type,content):
-	name = f"{name}.{type}"
-	with open(f"{directory}/{name}", "w") as file:
-		file.write(content)
+
+def createfile(directory, name, type, content):
+    name = f"{name}.{type}"
+    with open(f"{directory}/{name}", "w") as file:
+        file.write(content)
+
 def yaml_to_md_table(data, yaml_file, html_file):
     table_rows = []
     # Remove the nested loop that causes repetition
@@ -137,12 +153,16 @@ def yaml_to_md_table(data, yaml_file, html_file):
     # Write the markdown file
     createfile("./", "README", "md", md_content)
 
+# Read the YAML data, apply the rank update, and generate the HTML and MD files
 for i in range(7):
     yaml_file = f"sins/sins.yaml"
     html_file = f"sins/sins/{sinHTML[i]}"
-    yaml_to_html(yaml_file, html_file)
-with open(yaml_file, 'r', encoding='utf-8') as f:
+    with open(yaml_file, 'r', encoding='utf-8') as f:
         data = yaml.safe_load(f)
-yaml_to_md_table(data,"sins/sins.yaml",html_file)
+        data = replace_rank_with_gender(data)  # Replace the rank with the gendered one
+
+    yaml_to_html(yaml_file, html_file)
+    yaml_to_md_table(data, "sins/sins.yaml", html_file)
+
 with open("home.html", "w", encoding="utf-8") as file:
     file.write(home_html)

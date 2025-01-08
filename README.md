@@ -8,7 +8,7 @@ There are __Seven Deadly Sins__. Here is a table:
 |None|Lust|Siren|Daggers|Pink|Illusion|Faerie|Dominum|
 |None|Pride|Phoenix|Sword|Yellow|Immolation|Elf|Luminorium|
 |None|Sloth|Sphinx|Mace|Orange|Paralysis|Golem|Exaltum|
-|Riven|Wrath|Kraken|Chain-Whip|Red|Apocalyptic-Strength|Demon|Bellatorium|
+|Riven|Wrath|Kraken|Chain-Whip|Red|Apocalyptic-Strength|Demon|Bellatrix|
 
 
 [Home](home.html)
