@@ -5,16 +5,30 @@ import time
 from html import escape
 import os
 errorMessage = []
-name = data["name"]
-animal = data["animal"]
-sin = data["sin"]
-weapon = data["weapon"]
-colour = data["colour"]
-power = data["power"]
-race = data["race"]
 def json_to_html(json_file, html_file):
     with open(json_file, 'r', encoding='utf-8') as f:
-        data = json.load(f)
+        data = json.load(f)    
+        name = data.get("name")
+        if name is None:
+             name = ""
+        animal = data.get("animal")
+        if animal is None:
+             animal = ""
+        sin = data.get("sin")
+        if sin is None:
+             sin = ""
+        weapon = data.get("weapon")
+        if weapon is None:
+             weapon = ""
+        colour = data.get("colour")
+        if colour is None:
+             colour = ""
+        power = data.get("power")
+        if power is None:
+             power = ""
+        race = data.get("race")
+        if race is None:
+             race = ""
     fullName = f"{name}, The {animal} Sin of {sin}"
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
@@ -58,9 +72,7 @@ def json_to_html(json_file, html_file):
     html_content = re.sub(r'\*(.*?)\*', r'<i>\1</i>', html_content)
     with open(html_file, 'w', encoding='utf-8') as f:
         f.write(html_content)
-sins = Path("main/sins/json")
-sinJSON = [item.name for item in sins.iterdir()]
-sinHTML =  [item[:-4] + "html" for item in sinJSON]
+sinHTML =  [item.name for item in Path("sins/sins").iterdir()]
 home_html = f"""
 <!DOCTYPE html>
 <html lang="en">
@@ -83,34 +95,42 @@ home_html = f"""
     <h1>Home</h1>
 """
 for i in range(len(sinHTML)):
-    home_html += f"<li><a href='../sins/html/{sinHTML[i]}'>{sinHTML[i][:-5].capitalize()}</a></li>"
+    home_html += f"<li><a href='sins/{sinHTML[i]}'>{sinHTML[i][:-5].capitalize()}</a></li>"
 home_html += """
 </body>
 </html>
 """
-with open("main/home/home.html", "w", encoding="utf-8") as file:
+with open("sins/home.html", "w", encoding="utf-8") as file:
     file.write(home_html)
 def createfile(directory,name,type,content):
 	name = f"{name}.{type}"
 	with open(f"{directory}/{name}", "w") as file:
 		file.write(content)
 def json_to_md_table(directory):
-    json_files = [f for f in os.listdir(directory) if f.endswith('.json')]
+    with open(directory, "r") as file:
+        data_dict = json.load(file)
+    
     table_rows = []
-    for json_file in json_files:
-        with open(f"{directory}/{json_file}", "r") as file:
-            data = json.load(file)
-            row = f"|{name}|{sin}|{animal}|{weapon}|{colour}|{power}|{race}|"
-            table_rows.append(row)
+    for key, data in data_dict.items():
+        name = data.get("name", "")
+        animal = data["animal"]
+        sin = data["sin"]
+        weapon = data["weapon"]
+        colour = data["colour"]
+        power = data["power"]
+        race = data["race"]
+        row = f"|{name}|{sin}|{animal}|{weapon}|{colour}|{power}|{race}|"
+        table_rows.append(row)
+        
     table_header = "|Name|Sin|Mark|Weapon|Colour|Power|Race|\n"
     table_header += "|:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n"
     table_footer = "\n[Home](home/home.html)"
     md_content = f"There are __Seven Deadly Sins__. Here is a table:\n\n{table_header}{'\n'.join(table_rows)}\n\n{table_footer}"
     createfile("./", "README", "md", md_content)
-json_to_md_table('main/sins/json')
-for i in range(len(sinJSON)):
-    json_file = f"main/sins/json/{sinJSON[i]}"
-    html_file = f"main/sins/html/{sinHTML[i]}"
+json_to_md_table("sins/sins.json")
+for i in range(7):
+    json_file = f"sins/sins.json"
+    html_file = f"sins/sins/{sinHTML[i]}"
     json_to_html(json_file, html_file)
-with open("main/home/home.html", "w", encoding="utf-8") as file:
+with open("sins/home.html", "w", encoding="utf-8") as file:
     file.write(home_html)

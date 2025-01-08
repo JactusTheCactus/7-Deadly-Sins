@@ -1,5 +1,5 @@
-[
-    {
+{
+    "envy":{
         "name":"",
         "animal":"Gorgon",
         "sin":"Envy",
@@ -8,7 +8,7 @@
         "power":"Mimic",
         "race":"Changeling"
     },
-    {
+    "gluttony":{
         "name":"",
         "animal":"Hydra",
         "sin":"Gluttony",
@@ -17,7 +17,7 @@
         "power":"Absorbtion",
         "race":""
     },
-    {
+    "greed":{
         "name":"",
         "animal":"Dragon",
         "sin":"Greed",
@@ -26,7 +26,7 @@
         "power":"Ferrokinesis",
         "race":""
     },
-    {
+    "lust":{
         "name":"",
         "animal":"Siren",
         "sin":"Lust",
@@ -35,7 +35,7 @@
         "power":"Illusion",
         "race":"Faerie"
     },
-    {
+    "pride":{
         "name":"",
         "animal":"Phoenix",
         "sin":"Pride",
@@ -44,7 +44,7 @@
         "power":"Immolation",
         "race":"Elf"
     },
-    {
+    "sloth":{
         "name":"",
         "animal":"Sphinx",
         "sin":"Sloth",
@@ -53,7 +53,7 @@
         "power":"Paralysis",
         "race":"Golem"
     },
-    {
+    "wrath":{
         "name":"Riven",
         "animal":"Kraken",
         "sin":"Wrath",
@@ -62,4 +62,4 @@
         "power":"Apocalyptic Strength",
         "race":"Demon"
     }
-]
+}
