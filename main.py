@@ -8,13 +8,34 @@ errorMessage = []
 
 # Mapping of ranks based on sex
 rank_mapping = {
-    'Imperatore': {'m': 'Imperator', 'f': 'Imperatrix', 'neutral': 'Imperatore'},
-    'Venatorium': {'m': 'Venator', 'f': 'Venatrix', 'neutral': 'Venatorium'},
-    'Ferratorium': {'m': 'Ferro', 'f': 'Ferroa', 'neutral': 'Ferratorium'},
-    'Dominum': {'m': 'Dominus', 'f': 'Domina', 'neutral': 'Dominum'},
-    'Luminorium': {'m': 'Luminor', 'f': 'Luminora', 'neutral': 'Luminorium'},
-    'Exaltum': {'m': 'Exaltus', 'f': 'Exalta', 'neutral': 'Exaltum'},
-    'Bellatorium': {'m': 'Bellator', 'f': 'Bellatrix', 'neutral': 'Bellatorium'}
+    'Imperatore': {
+        'm': 'Imperator', 
+        'f': 'Imperatrix', 
+        'n': 'Imperatore'},
+    'Venatorium': {
+        'm': 'Venator', 
+        'f': 'Venatrix', 
+        'n': 'Venatorium'},
+    'Ferratorium': {
+        'm': 'Ferro', 
+        'f': 'Ferroa', 
+        'n': 'Ferratorium'},
+    'Dominum': {
+        'm': 'Dominus', 
+        'f': 'Domina', 
+        'n': 'Dominum'},
+    'Luminorium': {
+        'm': 'Luminor', 
+        'f': 'Luminora', 
+        'n': 'Luminorium'},
+    'Exaltum': {
+        'm': 'Exaltus', 
+        'f': 'Exalta', 
+        'n': 'Exaltum'},
+    'Bellatorium': {
+        'm': 'Bellator', 
+        'f': 'Bellatrix', 
+        'n': 'Bellatorium'}
 }
 
 def replace_rank_with_gender(data):
@@ -29,7 +50,7 @@ def replace_rank_with_gender(data):
             elif sex == 'f':
                 details['rank'] = rank_mapping.get(rank, {}).get('f', rank)
             else:
-                details['rank'] = rank_mapping.get(rank, {}).get('neutral', rank)
+                details['rank'] = rank_mapping.get(rank, {}).get('n', rank)
     
     return data
 
