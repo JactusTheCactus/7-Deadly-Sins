@@ -1,0 +1,78 @@
+envy:
+  name:
+  animal: Gorgon
+  sin: Envy
+  weapon: Staff
+  colour: Blue
+  power: Mimic
+  species: Changeling
+  sex:
+  rank:
+gluttony:
+  name:
+  animal: Hydra
+  sin: Gluttony
+  weapon: Battleaxe
+  colour: Purple
+  power: Absorbtion
+  species:
+  sex:
+  rank:
+greed:
+  name:
+  animal: Dragon
+  sin: Greed
+  weapon: Warhammer
+  colour: Green
+  power: Ferrokinesis
+  species:
+  sex:
+  rank:
+lust:
+  name:
+  animal: Siren
+  sin: Lust
+  weapon: Daggers
+  colour: Pink
+  power: Illusion
+  species: Faerie
+  sex:
+  rank:
+pride:
+  name:
+  animal: Phoenix
+  sin: Pride
+  weapon: Sword
+  colour: Yellow
+  power: Immolation
+  species: Elf
+  sex:
+  rank: Dominus
+sloth:
+  name:
+  animal: Sphinx
+  sin: Sloth
+  weapon: Mace
+  colour: Orange
+  power: Paralysis
+  species: Golem
+  sex:
+  rank:
+wrath:
+  name: Riven
+  animal: Kraken
+  sin: Wrath
+  weapon: Chain-Whip
+  colour: Red
+  power: Apocalyptic-Strength
+  species: Demon
+  sex: f
+  rank: Praetor
+roles:
+  1: Dominus
+  2: Praetor
+  3: Legatus
+  4: Centurion
+  5: Optio
+  6:
+  7:

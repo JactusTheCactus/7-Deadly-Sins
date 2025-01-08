@@ -1,13 +1,13 @@
-import json
+import yaml
 from pathlib import Path
 import re
 import time
 from html import escape
 import os
 errorMessage = []
-def json_to_html(json_file, html_file):
-    with open(json_file, 'r', encoding='utf-8') as f:
-        data = json.load(f)    
+def yaml_to_html(yaml_file, html_file):
+    with open(yaml_file, 'r', encoding='utf-8') as f:
+        data = yaml.safe_load(f)
         name = data.get("name")
         if name is None:
              name = ""
@@ -26,9 +26,9 @@ def json_to_html(json_file, html_file):
         power = data.get("power")
         if power is None:
              power = ""
-        race = data.get("race")
-        if race is None:
-             race = ""
+        species = data.get("species")
+        if species is None:
+             species = ""
     fullName = f"{name}, The {animal} Sin of {sin}"
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
@@ -62,7 +62,7 @@ def json_to_html(json_file, html_file):
             <br>
             Power: {escape(power)}</u>
             <br>
-            Race: {escape(race)}</u>
+            species: {escape(species)}</u>
         </p>
         <b><a href='../../home/home.html'>Home</a></b>
     </body>
@@ -106,31 +106,34 @@ def createfile(directory,name,type,content):
 	name = f"{name}.{type}"
 	with open(f"{directory}/{name}", "w") as file:
 		file.write(content)
-def json_to_md_table(directory):
+def yaml_to_md_table(yaml_data,directory,sin_key):
     with open(directory, "r") as file:
-        data_dict = json.load(file)
+        data_dict = yaml.safe_load(file)
     
     table_rows = []
     for key, data in data_dict.items():
-        name = data.get("name", "")
-        animal = data["animal"]
-        sin = data["sin"]
-        weapon = data["weapon"]
-        colour = data["colour"]
-        power = data["power"]
-        race = data["race"]
-        row = f"|{name}|{sin}|{animal}|{weapon}|{colour}|{power}|{race}|"
+        sin_data = yaml_data.get(sin_key, {})
+        name = sin_data.get("name", "")
+        animal = sin_data.get("animal", "")
+        sin = sin_data.get("sin", "")
+        weapon = sin_data.get("weapon", "")
+        colour = sin_data.get("colour", "")
+        power = sin_data.get("power", "")
+        species = sin_data.get("species", "")
+        row = f"|{name}|{sin}|{animal}|{weapon}|{colour}|{power}|{species}|"
         table_rows.append(row)
         
-    table_header = "|Name|Sin|Mark|Weapon|Colour|Power|Race|\n"
+    table_header = "|Name|Sin|Mark|Weapon|Colour|Power|species|\n"
     table_header += "|:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n"
     table_footer = "\n[Home](home.html)"
     md_content = f"There are __Seven Deadly Sins__. Here is a table:\n\n{table_header}{'\n'.join(table_rows)}\n\n{table_footer}"
     createfile("./", "README", "md", md_content)
-json_to_md_table("sins/sins.json")
 for i in range(7):
-    json_file = f"sins/sins.json"
+    yaml_file = f"sins/sins.yaml"
     html_file = f"sins/sins/{sinHTML[i]}"
-    json_to_html(json_file, html_file)
+    yaml_to_html(yaml_file, html_file)
+with open(yaml_file, 'r', encoding='utf-8') as f:
+        data = yaml.safe_load(f)
+yaml_to_md_table(data,"sins/sins.yaml",html_file)
 with open("home.html", "w", encoding="utf-8") as file:
     file.write(home_html)
