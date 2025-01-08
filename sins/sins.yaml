@@ -17,7 +17,7 @@ gluttony:
   power: Absorbtion
   species:
   sex:
-  rank:
+  rank: Venatorium
 greed:
   name:
   animal: Dragon
@@ -27,7 +27,7 @@ greed:
   power: Ferrokinesis
   species:
   sex:
-  rank:
+  rank: Ferratorium
 lust:
   name:
   animal: Siren
@@ -37,7 +37,7 @@ lust:
   power: Illusion
   species: Faerie
   sex:
-  rank:
+  rank: Dominum
 pride:
   name:
   animal: Phoenix
@@ -47,7 +47,7 @@ pride:
   power: Immolation
   species: Elf
   sex:
-  rank: Dominus
+  rank: Luminorium
 sloth:
   name:
   animal: Sphinx
@@ -57,7 +57,7 @@ sloth:
   power: Paralysis
   species: Golem
   sex:
-  rank:
+  rank: Exaltum
 wrath:
   name: Riven
   animal: Kraken
@@ -67,12 +67,33 @@ wrath:
   power: Apocalyptic-Strength
   species: Demon
   sex: f
-  rank: Praetor
-roles:
-  1: Dominus
-  2: Praetor
-  3: Legatus
-  4: Centurion
-  5: Optio
-  6:
-  7:
+  rank: Bellatorium
+ranks:
+  Dominum:
+    - Dominum
+    - Dominus
+    - Domina
+  Exaltum:
+    - Exaltum
+    - Exaltus
+    - Exalta
+  Ferratorium:
+    - Ferratorium
+    - Ferrator
+    - Ferrata
+  Bellatorium:
+    - Bellatorium
+    - Bellator
+    - Bellata
+  Imperatore:
+    - Imperatore
+    - Imperator
+    - Imperata
+  Venatorium:
+    - Venatorium
+    - Venator
+    - Venata
+  Luminorium:
+    - Luminorium
+    - Luminor
+    - Luminata
