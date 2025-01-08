@@ -97,7 +97,7 @@ home_html = f"""
 <body>
     <h1>Home</h1>
 """
-for i in range(len(sinHTML)):
+for i in range(7):
     home_html += f"<li><a href='sins/{sinHTML[i]}'>{sinHTML[i][:-5].capitalize()}</a></li>"
 home_html += """
 </body>
@@ -109,28 +109,34 @@ def createfile(directory,name,type,content):
 	name = f"{name}.{type}"
 	with open(f"{directory}/{name}", "w") as file:
 		file.write(content)
-def yaml_to_md_table(yaml_data,directory,sin_key):
-    with open(directory, "r") as file:
-        data_dict = yaml.safe_load(file)
-    
+def yaml_to_md_table(data, yaml_file, html_file):
     table_rows = []
-    for sin_key, yaml_data in data_dict.items():
-        sin_data = yaml_data.get(sin_key, {})
-        name = sin_data.get("name", "")
-        animal = sin_data.get("animal", "")
-        sin = sin_data.get("sin", "")
-        weapon = sin_data.get("weapon", "")
-        colour = sin_data.get("colour", "")
-        power = sin_data.get("power", "")
-        species = sin_data.get("species", "")
-        rank = sin_data.get("rank", "")
-        row = f"|{name}|{sin}|{animal}|{weapon}|{colour}|{power}|{species}|{rank}|"
+    # Remove the nested loop that causes repetition
+    for sin, details in data.items():
+        if sin == "ranks":  # Skip processing ranks if it's not part of the table
+            continue
+        # Extract the details
+        name = details.get("name", "Unknown")
+        animal = details.get("animal", "Unknown")
+        sin_type = details.get("sin", "Unknown")
+        weapon = details.get("weapon", "Unknown")
+        colour = details.get("colour", "Unknown")
+        power = details.get("power", "Unknown")
+        species = details.get("species", "Unknown")
+        sex = details.get("sex", "Unknown")
+        rank = details.get("rank", "Unknown")
+        # Only add the row once
+        row = f"|{name}|{sin_type}|{animal}|{weapon}|{colour}|{power}|{species}|{rank}|"
         table_rows.append(row)
-        
-    table_header = "|Name|Sin|Mark|Weapon|Colour|Power|Species|Rank|\n|:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n"
+
+    # Prepare markdown content
+    table_header = "|Name|Sin|Mark|Weapon|Colour|Power|Species|Rank|\n|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n"
     table_footer = "\n[Home](home.html)"
     md_content = f"There are __Seven Deadly Sins__. Here is a table:\n\n{table_header}{'\n'.join(table_rows)}\n\n{table_footer}"
+    
+    # Write the markdown file
     createfile("./", "README", "md", md_content)
+
 for i in range(7):
     yaml_file = f"sins/sins.yaml"
     html_file = f"sins/sins/{sinHTML[i]}"

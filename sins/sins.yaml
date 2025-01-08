@@ -7,7 +7,7 @@ envy:
   power: Mimic
   species: Changeling
   sex:
-  rank:
+  rank: Imperatore
 gluttony:
   name:
   animal: Hydra
@@ -68,32 +68,3 @@ wrath:
   species: Demon
   sex: f
   rank: Bellatorium
-ranks:
-  Dominum:
-    - Dominum
-    - Dominus
-    - Domina
-  Exaltum:
-    - Exaltum
-    - Exaltus
-    - Exalta
-  Ferratorium:
-    - Ferratorium
-    - Ferrator
-    - Ferrata
-  Bellatorium:
-    - Bellatorium
-    - Bellator
-    - Bellata
-  Imperatore:
-    - Imperatore
-    - Imperator
-    - Imperata
-  Venatorium:
-    - Venatorium
-    - Venator
-    - Venata
-  Luminorium:
-    - Luminorium
-    - Luminor
-    - Luminata
