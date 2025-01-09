@@ -1834,7 +1834,7 @@ input, select, textarea {
 		background-color: transparent;
 		border: solid 1px !important;
 		border-color: rgba(255, 255, 255, 0.15) !important;
-		border-radius: 3em;
+		border-radius: 5em;
 		color: #ffffff !important;
 		cursor: pointer;
 		display: inline-block;
