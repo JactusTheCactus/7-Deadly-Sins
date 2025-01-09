@@ -100,59 +100,6 @@ def yaml_to_html(yaml_data, aspect_key, html_file):
         fullaspect = f"{animal} {alignment} of {aspect}"
         fullName = f"{aspectTitle}, {fullaspect}"
         return fullName
-    html_content = f"""
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>{escape(aspect)}</title>
-		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="main.css" />
-		<noscript><link rel="stylesheet" href="noscript.css" /></noscript>
-		<style>
-			.mono {{
-				font-size: 1.5em;
-				font-weight: bold;
-                white-space: pre;
-                font-family: monospace;
-                margin-top: -3em;
-                margin-left: -15em;
-			}}
-		</style>
-	</head>
-	<body class="is-preload">
-			<header id="header">
-				<a href="index.html#{escape(data[aspect_key]['alignment'].lower())}" class="title" style="font-family: monospace;"><-Back</a>
-			</header>
-			<div id="wrapper">
-					<section id="main" class="wrapper">
-						<div class="inner">
-							<h1 class="major">{escape(full(aspect.lower()))}</h1>
-                                Species: {escape(str(data[aspect_key]['species']))}<br>
-                                Superpower: {escape(str(data[aspect_key]['power']))}<br>
-                                Gear-Colour: {escape(str(data[aspect_key]['colour']))}<br>
-                                Weapon: {escape(str(data[aspect_key]['weapon']))}<br>
-                            </p>
-						</div>
-					</section>
-			</div>
-			<script src="jquery.min.js"></script>
-			<script src="jquery.scrollex.min.js"></script>
-			<script src="jquery.scrolly.min.js"></script>
-			<script src="browser.min.js"></script>
-			<script src="breakpoints.min.js"></script>
-			<script src="util.js"></script>
-			<script src="main.js"></script>
-	</body>
-</html>
-    """
-    html_content = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', html_content)
-    html_content = re.sub(r'\*(.*?)\*', r'<i>\1</i>', html_content)
-    with open(html_file, 'w', encoding='utf-8') as f:
-        f.write(html_content)
-def createfile(directory,name,type,content):
-	name = f"{name}.{type}"
-	with open(f"{directory}/{name}", "w") as file:
-		file.write(content)
 yaml_file = "aspects.yaml"
 with open(yaml_file, 'r', encoding='utf-8') as f:
     data = yaml.safe_load(f)
@@ -181,7 +128,39 @@ def title(aspect):
         else:
             title = f"{name}, the {rank}"
     return title
-# Define the HTML structure as a multi-line string
+def full(aspect_key):
+        if data[aspect_key]['name'] is None:
+            name = f"{data[aspect_key]['aspect']}"
+        else:
+            name = data[aspect_key]['name']
+        name = f"{name}"
+        rank = f"{data[aspect_key]['rank']}"
+        animal = f"{data[aspect_key]['animal']}"
+        aspect = f"{data[aspect_key]['aspect']}"
+        aspectTitle = title(aspect_key)
+        alignment = data[aspect_key]['alignment']
+        fullaspect = f"{animal} {alignment} of {aspect}"
+        fullName = f"{aspectTitle}, {fullaspect}"
+        return fullName
+
+sinList = [
+    "envy",
+    "gluttony",
+    "greed",
+    "lust",
+    "pride",
+    "sloth",
+    "wrath"
+]
+virtueList = [
+    "charity",
+    "chastity",
+    "diligence",
+    "kindness",
+    "humility",
+    "patience",
+    "temperance"
+]
 html_content = f"""
 <!DOCTYPE HTML>
 <html>
@@ -189,6 +168,16 @@ html_content = f"""
         <title>The Capital Aspects</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <style>
+			.mono {{
+				font-size: 1.5em;
+				font-weight: bold;
+                white-space: pre;
+                font-family: monospace;
+                margin-top: -3em;
+                margin-left: -15em;
+			}}
+		</style>
         <link rel="stylesheet" href="main.css" />
         <noscript><link rel="stylesheet" href="noscript.css" /></noscript>
     </head>
@@ -207,48 +196,86 @@ html_content = f"""
             <div id="wrapper">
 """
 html_content += f"""
-                    <section id="aspect" class="wrapper style1 fullscreen fade-up">
-                        <div class="inner">
-                            <h1>The Capital Aspects</h1>
-                        </div>
-                    </section>
-"""
-html_content += """
-                    <section id="sin" class="wrapper style3 fade-up">
-                        <div class="inner">
-                            <h1>The Seven Deadly Sins</h1>
-                            <div class="features">
-                                <section>
-                                    <h3><a href="envy.html" id="envy" class="button primary fit">{escape(title('envy'))}</a></h3>
-                                    <h3><a href="gluttony.html" id="gluttony" class="button primary fit">{escape(title('gluttony'))}</a></h3>
-                                    <h3><a href="greed.html" id="greed" class="button primary fit">{escape(title('greed'))}</a></h3>
-                                    <h3><a href="lust.html" id="lust" class="button primary fit">{escape(title('lust'))}</a></h3>
-                                    <h3><a href="pride.html" id="pride" class="button primary fit">{escape(title('pride'))}</a></h3>
-                                    <h3><a href="sloth.html" id="sloth" class="button primary fit">{escape(title('sloth'))}</a></h3>
-                                    <h3><a href="wrath.html" id="wrath" class="button primary fit">{escape(title('wrath'))}</a></h3>
-                                </section>
-                            </div>
-                        </div>
-                    </section>
+            <section id="aspect" class="wrapper style1 fullscreen fade-up">
+                <div class="inner">
+                    <h1>The Capital Aspects</h1>
+                </div>
+            </section>
 """
 html_content += f"""
-                    <section id="virtue" class="wrapper style3 fade-up">
-                        <div class="inner">
-                            <h1>The Seven Heavenly Virtues</h1>
-                            <div class="features">
-                                <section>
-                                    <h3><a href="charity.html" id="charity" class="button primary fit">{escape(title('charity'))}</a></h3>
-                                    <h3><a href="chastity.html" id="chastity" class="button primary fit">{escape(title('chastity'))}</a></h3>
-                                    <h3><a href="diligence.html" id="diligence" class="button primary fit">{escape(title('diligence'))}</a></h3>
-                                    <h3><a href="humility.html" id="humility" class="button primary fit">{escape(title('humility'))}</a></h3>
-                                    <h3><a href="kindness.html" id="kindness" class="button primary fit">{escape(title('kindness'))}</a></h3>
-                                    <h3><a href="patience.html" id="patience" class="button primary fit">{escape(title('patience'))}</a></h3>
-                                    <h3><a href="temperance.html" id="temperance" class="button primary fit">{escape(title('temperance'))}</a></h3>
-                                </section>
-                            </div>
-                        </div>
-                    </section>
+            <section id="sin" class="wrapper style3 fade-up">
+                <div class="inner">
+                    <h1>The Seven Deadly Sins</h1>
+                    <div class="features">
+                        <section>
 """
+for i in range(len(sinList)):
+    aspect_key = sinList[i]
+    html_content += f"""
+                            <h3><a href="#{escape(aspect_key)}" class="button primary fit scrolly">{escape(title(aspect_key))}</a></h3>
+"""
+html_content += f"""
+                        </section>
+                    </div>
+                </div>
+            </section>
+"""
+for i in range(len(sinList)):
+    aspect_key = sinList[i]
+    species = str(data[aspect_key]['species'])
+    power = str(data[aspect_key]['power'])
+    colour = str(data[aspect_key]['colour'])
+    weapon = str(data[aspect_key]['weapon'])
+    fullName = full(aspect_key)
+    html_content += f"""
+                    <section id="{escape(aspect_key)}" class="wrapper">
+						<div class="inner">
+							<h1 class="major">{escape(fullName)}</h1>
+                                Species: {escape(species)}<br>
+                                Superpower: {escape(power)}<br>
+                                Gear-Colour: {escape(colour)}<br>
+                                Weapon: {escape(weapon)}<br>
+                            </p>
+						</div>
+					</section>
+    """
+html_content += f"""
+            <section id="virtue" class="wrapper style3 fade-up">
+                <div class="inner">
+                    <h1>The Seven Heavenly Virtues</h1>
+                    <div class="features">
+                        <section>
+"""
+for i in range(len(virtueList)):
+    aspect_key = virtueList[i]
+    html_content += f"""
+                            <h3><a href="#{escape(aspect_key)}" class="button primary fit scrolly">{escape(title(aspect_key))}</a></h3>
+"""
+html_content += f"""
+                        </section>
+                    </div>
+                </div>
+            </section>
+"""
+for i in range(len(virtueList)):
+    aspect_key = virtueList[i]
+    species = str(data[aspect_key]['species'])
+    power = str(data[aspect_key]['power'])
+    colour = str(data[aspect_key]['colour'])
+    weapon = str(data[aspect_key]['weapon'])
+    fullName = full(aspect_key)
+    html_content += f"""
+                    <section id="{escape(aspect_key)}" class="wrapper">
+						<div class="inner">
+							<h1 class="major">{escape(fullName)}</h1>
+                                Species: {escape(species)}<br>
+                                Superpower: {escape(power)}<br>
+                                Gear-Colour: {escape(colour)}<br>
+                                Weapon: {escape(weapon)}<br>
+                            </p>
+						</div>
+					</section>
+    """
 html_content += f"""
             </div>
             <script src="jquery.min.js"></script>
