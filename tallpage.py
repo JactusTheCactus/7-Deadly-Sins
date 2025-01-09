@@ -238,7 +238,7 @@ def genAspect(aspectAlignment):
         aspect_key = list[i]
         def setData(x):
             x = str(data[aspect_key][x])
-            if x == "None": x = "N/A"
+            if x == "None": x = "[N/A]"
             return x
         species = setData('species')
         power = setData('power')
