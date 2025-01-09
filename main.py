@@ -198,8 +198,8 @@ html_content = f"""
                     <nav>
                         <ul>
                             <li><a href="#home">Home</a></li>
-                            <li><a href="#sins">The Seven Deadly Sins</a></li>
-                            <li><a href="#virtues">The Seven Heavenly Virtues</a></li>
+                            <li><a href="#sin">The Seven Deadly Sins</a></li>
+                            <li><a href="#virtue">The Seven Heavenly Virtues</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -210,7 +210,7 @@ html_content = f"""
                             <h1>The Seven Capital Aspects</h1>
                         </div>
                     </section>
-                    <section id="sins" class="wrapper style3 fade-up">
+                    <section id="sin" class="wrapper style3 fade-up">
                         <div class="inner">
                             <div class="features">
                                 <section>
@@ -225,7 +225,7 @@ html_content = f"""
                             </div>
                         </div>
                     </section>
-                    <section id="virtues" class="wrapper style3 fade-up">
+                    <section id="virtue" class="wrapper style3 fade-up">
                         <div class="inner">
                             <div class="features">
                                 <section>
