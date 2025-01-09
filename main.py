@@ -94,8 +94,8 @@ def yaml_to_html(yaml_data, sin_key, html_file):
 	<head>
 		<title>{escape(sin)}</title>
 		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="../main.css" />
-		<noscript><link rel="stylesheet" href="../noscript.css" /></noscript>
+		<link rel="stylesheet" href="main.css" />
+		<noscript><link rel="stylesheet" href="noscript.css" /></noscript>
 
 		<style>
 			.mono {{
@@ -110,7 +110,7 @@ def yaml_to_html(yaml_data, sin_key, html_file):
 	</head>
 	<body class="is-preload">
 			<header id="header">
-				<a href="../index.html#sins" class="title" style="font-family: monospace;"><-Back</a>
+				<a href="index.html#sins" class="title" style="font-family: monospace;"><-Back</a>
 			</header>
 			<div id="wrapper">
 					<section id="main" class="wrapper">
@@ -146,7 +146,7 @@ def createfile(directory,name,type,content):
 	with open(f"{directory}/{name}", "w") as file:
 		file.write(content)
 
-yaml_file = "site/sins.yaml"
+yaml_file = "sins.yaml"
 with open(yaml_file, 'r', encoding='utf-8') as f:
     data = yaml.safe_load(f)
 
@@ -160,7 +160,7 @@ sinHTML =  [
      "wrath"
      ]
 for sin in sinHTML:
-    html_file = f"site/sins/{sin}.html"
+    html_file = f"{sin}.html"
     yaml_to_html(data, sin, html_file)
 
 # Define the HTML structure as a multi-line string
@@ -183,7 +183,7 @@ html_content = f"""
 
         <!-- Header -->
         <header id="header">
-            <a href="#home" class="title">Hyperspace</a>
+            <a href="#home" class="title">space</a>
             <nav>
                 <ul>
                     <li><a href="#home" class="active">Home</a></li>
@@ -228,13 +228,13 @@ html_content = f"""
                                  <span class="icon major fa-gem"></span>
                                  -->
                                 <section>
-                                    <h3><a href="sins/envy.html" id="envy" class="button primary fit">{escape(full('envy'))}</a></h3>
-                                    <h3><a href="sins/gluttony.html" id="gluttony" class="button primary fit">{escape(full('gluttony'))}</a></h3>
-                                    <h3><a href="sins/greed.html" id="greed" class="button primary fit">{escape(full('greed'))}</a></h3>
-                                    <h3><a href="sins/lust.html" id="lust" class="button primary fit">{escape(full('lust'))}</a></h3>
-                                    <h3><a href="sins/pride.html" id="pride" class="button primary fit">{escape(full('pride'))}</a></h3>
-                                    <h3><a href="sins/sloth.html" id="sloth" class="button primary fit">{escape(full('sloth'))}</a></h3>
-                                    <h3><a href="sins/wrath.html" id="wrath" class="button primary fit">{escape(full('wrath'))}</a></h3>
+                                    <h3><a href="envy.html" id="envy" class="button primary fit">{escape(full('envy'))}</a></h3>
+                                    <h3><a href="gluttony.html" id="gluttony" class="button primary fit">{escape(full('gluttony'))}</a></h3>
+                                    <h3><a href="greed.html" id="greed" class="button primary fit">{escape(full('greed'))}</a></h3>
+                                    <h3><a href="lust.html" id="lust" class="button primary fit">{escape(full('lust'))}</a></h3>
+                                    <h3><a href="pride.html" id="pride" class="button primary fit">{escape(full('pride'))}</a></h3>
+                                    <h3><a href="sloth.html" id="sloth" class="button primary fit">{escape(full('sloth'))}</a></h3>
+                                    <h3><a href="wrath.html" id="wrath" class="button primary fit">{escape(full('wrath'))}</a></h3>
                                 </section>
                             </div>
                         </div>
@@ -256,7 +256,7 @@ html_content = f"""
 """
 
 # Define the output file name
-file_name = "site/index.html"
+file_name = "index.html"
 
 # Write the HTML content to the file
 with open(file_name, "w") as file:
