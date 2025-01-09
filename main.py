@@ -212,6 +212,7 @@ html_content = f"""
                     </section>
                     <section id="sin" class="wrapper style3 fade-up">
                         <div class="inner">
+                            <h1>The Seven Deadly Sins</h1>
                             <div class="features">
                                 <section>
                                     <h3><a href="envy.html" id="envy" class="button primary fit">{escape(title('envy'))}</a></h3>
