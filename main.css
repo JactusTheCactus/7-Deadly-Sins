@@ -1874,7 +1874,7 @@ input, select, textarea {
 			opacity: 0;
 			position: absolute;
 			top: 0;
-			width: fit-content;
+			width: auto;
 		}
 
 		input[type="submit"].icon:before,
