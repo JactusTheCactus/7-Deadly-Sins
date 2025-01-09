@@ -58,7 +58,7 @@ def yaml_to_html(yaml_data, sin_key, html_file):
     if name == "" or name is None: name = "[NAME]"
     animal = sin_data.get("animal","")
     if animal == "" or animal is None: animal = "[ANIMAL]"
-    sin = str(sin_data.get("sin",""))
+    sin = sin_data.get("sin","")
     if sin == "" or sin is None: sin = "[SIN]"
     weapon = sin_data.get("weapon","")
     if weapon == "" or weapon is None: weapon = "[WEAPON]"
@@ -74,24 +74,37 @@ def yaml_to_html(yaml_data, sin_key, html_file):
     else: pronouns = ["they", "them", "theirs"]
     rank = sin_data.get("rank","")
     if rank == "" or rank is None: rank = "[RANK]"
-    def title(sin):
-        prefixTitles = ["Imperatore","Dominum"]
-        if data[sin]['rank'] in prefixTitles:
-            title = f"{data[sin]['rank']} {data[sin]['name']}"
-        else: title = f"{data[sin]['name']}, the {data[sin]['rank']}"
-    def full(sin):
-        if data[sin]['name'] is not None:
-            name = f"{data[sin]['name']}"
+    def title(sin_key):
+        name = data[sin_key]['name']
+        prefixTitles = [
+            "Imperatore",
+            "Dominum"
+            ]
+        if data[sin_key]['rank'] in prefixTitles:
+            rank = f"{get_gendered_rank(data[sin_key]['rank'],data[sin_key]['sex'])}"
+            if name is None:
+                title = rank
+            else:
+                title = f"{rank} {name}"
         else:
-            name = f"{sin.capitalize()}"
+            rank = f"{get_gendered_rank(data[sin_key]['rank'],data[sin_key]['sex'])}"
+            if name is None:
+                title = f"{rank}"
+            else:
+                title = f"{name}, the {rank}"
+        return(title)
+    def full(sin_key):
+        if data[sin_key]['name'] is None:
+            name = f"{data[sin_key]['sin']}"
+        else:
+            name = data[sin_key]['name']
         name = f"{name}"
-        rank = f"{data[sin]['rank']}"
-        rank = f"{get_gendered_rank(data[sin]['rank'],data[sin]['sex'])}"
-        animal = f"{data[sin]['animal']}"
-        sin = f"{data[sin]['sin']}"
-        fullName = f"{title}, {animal} sin of {sin}"
+        rank = f"{data[sin_key]['rank']}"
+        animal = f"{data[sin_key]['animal']}"
+        sin = f"{data[sin_key]['sin']}"
+        sinTitle = title(sin_key)
+        fullName = f"{sinTitle}, {animal} sin of {sin}"
         return fullName
-
     html_content = f"""
 <!DOCTYPE html>
 <html>
@@ -168,10 +181,21 @@ for sin in sinHTML:
     yaml_to_html(data, sin, html_file)
 
 def title(sin):
+    name = data[sin]['name']
+    rank = data[sin]['rank']
+    sex = data[sin]['sex']
     prefixTitles = ["Imperatore","Dominum"]
-    if data[sin]['rank'] in prefixTitles:
-        title = f"{data[sin]['rank']} {data[sin]['name']}"
-    else: title = f"{data[sin]['name']}, the {data[sin]['rank']}"
+    rank = get_gendered_rank(rank,sex)
+    if rank in prefixTitles:
+        if name is None:
+            title = rank
+        else:
+            title = f"{rank} {name}"
+    else:
+        if name is None:
+            title = rank
+        else:
+            title = f"{name}, the {rank}"
     return title
 
 # Define the HTML structure as a multi-line string
