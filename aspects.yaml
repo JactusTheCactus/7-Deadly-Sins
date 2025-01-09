@@ -1,5 +1,5 @@
 envy:
-  name:
+  name: Invidia
   animal: Gorgon
   aspect: Envy
   weapon: Staff
@@ -10,7 +10,7 @@ envy:
   rank: Imperatore
   alignment: Sin
 gluttony:
-  name:
+  name: Gula
   animal: Hydra
   aspect: Gluttony
   weapon: Battleaxe
@@ -21,7 +21,7 @@ gluttony:
   rank: Venatorium
   alignment: Sin
 greed:
-  name:
+  name: Avaritia
   animal: Dragon
   aspect: Greed
   weapon: Warhammer
@@ -32,7 +32,7 @@ greed:
   rank: Ferratorium
   alignment: Sin
 lust:
-  name:
+  name: Luxuria
   animal: Siren
   aspect: Lust
   weapon: Daggers
@@ -43,7 +43,7 @@ lust:
   rank: Dominum
   alignment: Sin
 pride:
-  name:
+  name: Superbia
   animal: Phoenix
   aspect: Pride
   weapon: Sword
@@ -54,7 +54,7 @@ pride:
   rank: Luminorium
   alignment: Sin
 sloth:
-  name:
+  name: Acedia
   animal: Sphinx
   aspect: Sloth
   weapon: Mace
@@ -76,7 +76,7 @@ wrath:
   rank: Bellatorium
   alignment: Sin
 charity:
-  name:
+  name: Caritas
   animal:
   aspect: Charity
   weapon:
@@ -87,7 +87,7 @@ charity:
   rank:
   alignment: Virtue
 chastity:
-  name:
+  name: Castitas
   animal:
   aspect: Chastity
   weapon:
@@ -98,7 +98,7 @@ chastity:
   rank:
   alignment: Virtue
 diligence:
-  name:
+  name: Diligentia
   animal:
   aspect: Diligence
   weapon:
@@ -109,7 +109,7 @@ diligence:
   rank:
   alignment: Virtue
 kindness:
-  name:
+  name: Humanitas
   animal:
   aspect: Kindness
   weapon:
@@ -120,7 +120,7 @@ kindness:
   rank:
   alignment: Virtue
 humility:
-  name:
+  name: Humilitas
   animal:
   aspect: Humility
   weapon:
@@ -131,7 +131,7 @@ humility:
   rank:
   alignment: Virtue
 patience:
-  name:
+  name: Patientia
   animal:
   aspect: Patience
   weapon:
@@ -142,7 +142,7 @@ patience:
   rank:
   alignment: Virtue
 temperance:
-  name:
+  name: Temperantia
   animal:
   aspect: Temperance
   weapon:
