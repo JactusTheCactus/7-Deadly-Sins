@@ -47,6 +47,8 @@ def get_gendered_rank(rank, sex):
         return rank
 def yaml_to_html(yaml_data, aspect_key, html_file):
     aspect_data = yaml_data.get(aspect_key, {})
+    alignment = safe_escape(aspect_data.get("alignment",""))
+    if alignment == "" or alignment is None: alignment = "[Alignment]"
     name = safe_escape(aspect_data.get("name",""))
     if name == "" or name is None: name = "[NAME]"
     animal = safe_escape(aspect_data.get("animal",""))
@@ -94,7 +96,8 @@ def yaml_to_html(yaml_data, aspect_key, html_file):
         animal = f"{data[aspect_key]['animal']}"
         aspect = f"{data[aspect_key]['aspect']}"
         aspectTitle = title(aspect_key)
-        fullaspect = f"{animal} aspect of {aspect}"
+        alignment = data[aspect_key]['alignment']
+        fullaspect = f"{animal} {alignment} of {aspect}"
         fullName = f"{aspectTitle}, {fullaspect}"
         return fullName
     html_content = f"""

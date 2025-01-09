@@ -8,6 +8,7 @@ envy:
   species: Changeling
   sex:
   rank: Imperatore
+  alignment: Sin
 gluttony:
   name:
   animal: Hydra
@@ -18,6 +19,7 @@ gluttony:
   species:
   sex:
   rank: Venatorium
+  alignment: Sin
 greed:
   name:
   animal: Dragon
@@ -28,6 +30,7 @@ greed:
   species:
   sex:
   rank: Ferratorium
+  alignment: Sin
 lust:
   name:
   animal: Siren
@@ -38,6 +41,7 @@ lust:
   species: Faerie
   sex: F
   rank: Dominum
+  alignment: Sin
 pride:
   name:
   animal: Phoenix
@@ -48,6 +52,7 @@ pride:
   species: Elf
   sex:
   rank: Luminorium
+  alignment: Sin
 sloth:
   name:
   animal: Sphinx
@@ -58,6 +63,7 @@ sloth:
   species: Golem
   sex:
   rank: Exaltum
+  alignment: Sin
 wrath:
   name: Riven
   animal: Kraken
@@ -68,6 +74,7 @@ wrath:
   species: Demon
   sex: F
   rank: Bellatorium
+  alignment: Sin
 charity:
   name:
   animal:
@@ -78,6 +85,7 @@ charity:
   species:
   sex:
   rank:
+  alignment: Virtue
 chastity:
   name:
   animal:
@@ -88,6 +96,7 @@ chastity:
   species:
   sex:
   rank:
+  alignment: Virtue
 diligence:
   name:
   animal:
@@ -98,6 +107,7 @@ diligence:
   species:
   sex:
   rank:
+  alignment: Virtue
 kindness:
   name:
   animal:
@@ -108,6 +118,7 @@ kindness:
   species:
   sex:
   rank:
+  alignment: Virtue
 humility:
   name:
   animal:
@@ -118,6 +129,7 @@ humility:
   species:
   sex:
   rank:
+  alignment: Virtue
 patience:
   name:
   animal:
@@ -128,6 +140,7 @@ patience:
   species:
   sex:
   rank:
+  alignment: Virtue
 temperance:
   name:
   animal:
@@ -138,3 +151,4 @@ temperance:
   species:
   sex:
   rank:
+  alignment: Virtue
