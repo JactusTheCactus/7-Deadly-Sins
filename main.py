@@ -185,7 +185,6 @@ html_content = f"""
         <header id="header">
             <nav>
                 <ul>
-                    <li><a href="#home" class="active">Home</a></li>
                 </ul>
             </nav>
         </header>
