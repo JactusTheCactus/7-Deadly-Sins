@@ -55,15 +55,17 @@ def full(sin):
         name = f"{sin.capitalize()}"
     name = f"{name}"
     rank = f"{data[sin]['rank']}"
-    prefixTitles = ["Imperatore","Dominum"]
-    if rank in prefixTitles:
-        title = f"{rank} {name}"
-    else: title = f"{name}, the {rank}"
     rank = f"{get_gendered_rank(data[sin]['rank'],data[sin]['sex'])}"
     animal = f"{data[sin]['animal']}"
     sin = f"{data[sin]['sin']}"
     fullName = f"{title}, {animal} sin of {sin}"
     return fullName
+
+def title(sin):
+        prefixTitles = ["Imperatore","Dominum"]
+        if data[sin]['rank'] in prefixTitles:
+            title = f"{data[sin]['rank']} {data[sin]['name']}"
+        else: title = f"{data[sin]['name']}, the {data[sin]['rank']}"
 
 def yaml_to_html(yaml_data, sin_key, html_file):
     sin_data = yaml_data.get(sin_key, {})
@@ -71,7 +73,7 @@ def yaml_to_html(yaml_data, sin_key, html_file):
     if name == "" or name is None: name = "[NAME]"
     animal = sin_data.get("animal","")
     if animal == "" or animal is None: animal = "[ANIMAL]"
-    sin = sin_data.get("sin","")
+    sin = str(sin_data.get("sin",""))
     if sin == "" or sin is None: sin = "[SIN]"
     weapon = sin_data.get("weapon","")
     if weapon == "" or weapon is None: weapon = "[WEAPON]"
@@ -117,10 +119,10 @@ def yaml_to_html(yaml_data, sin_key, html_file):
 						<div class="inner">
 							<h1 class="major">{escape(full(sin.lower()))}</h1>
 							<p class="mono">
-                                Species:        {escape(species)}
-                                Superpower:     {escape(power)}
-                                Gear-Colour:    {escape(colour)}
-                                Weapon:         {escape(weapon)}
+                                Species:        {escape(str(data[sin_key]['species']))}
+                                Superpower:     {escape(str(data[sin_key]['power']))}
+                                Gear-Colour:    {escape(str(data[sin_key]['colour']))}
+                                Weapon:         {escape(str(data[sin_key]['weapon']))}
                             </p>
 						</div>
 					</section>
@@ -218,13 +220,13 @@ html_content = f"""
                                  <span class="icon major fa-gem"></span>
                                  -->
                                 <section>
-                                    <h3><a href="envy.html" id="envy" class="button primary fit">{escape(full('envy'))}</a></h3>
-                                    <h3><a href="gluttony.html" id="gluttony" class="button primary fit">{escape(full('gluttony'))}</a></h3>
-                                    <h3><a href="greed.html" id="greed" class="button primary fit">{escape(full('greed'))}</a></h3>
-                                    <h3><a href="lust.html" id="lust" class="button primary fit">{escape(full('lust'))}</a></h3>
-                                    <h3><a href="pride.html" id="pride" class="button primary fit">{escape(full('pride'))}</a></h3>
-                                    <h3><a href="sloth.html" id="sloth" class="button primary fit">{escape(full('sloth'))}</a></h3>
-                                    <h3><a href="wrath.html" id="wrath" class="button primary fit">{escape(full('wrath'))}</a></h3>
+                                    <h3><a href="envy.html" id="envy" class="button primary fit">{escape(str(title('envy')))}</a></h3>
+                                    <h3><a href="gluttony.html" id="gluttony" class="button primary fit">{escape(str(title('gluttony')))}</a></h3>
+                                    <h3><a href="greed.html" id="greed" class="button primary fit">{escape(str(title('greed')))}</a></h3>
+                                    <h3><a href="lust.html" id="lust" class="button primary fit">{escape(str(title('lust')))}</a></h3>
+                                    <h3><a href="pride.html" id="pride" class="button primary fit">{escape(str(title('pride')))}</a></h3>
+                                    <h3><a href="sloth.html" id="sloth" class="button primary fit">{escape(str(title('sloth')))}</a></h3>
+                                    <h3><a href="wrath.html" id="wrath" class="button primary fit">{escape(str(title('wrath')))}</a></h3>
                                 </section>
                             </div>
                         </div>
