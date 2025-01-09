@@ -183,7 +183,6 @@ html_content = f"""
 
         <!-- Header -->
         <header id="header">
-            <a href="#home" class="title">space</a>
             <nav>
                 <ul>
                     <li><a href="#home" class="active">Home</a></li>
