@@ -228,6 +228,7 @@ html_content = f"""
                     </section>
                     <section id="virtue" class="wrapper style3 fade-up">
                         <div class="inner">
+                            <h1>The Seven Heavenly Virtues</h1>
                             <div class="features">
                                 <section>
                                     <h3><a href="charity.html" id="charity" class="button primary fit">{escape(title('charity'))}</a></h3>
