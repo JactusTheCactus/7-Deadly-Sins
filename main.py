@@ -155,11 +155,9 @@ def createfile(directory,name,type,content):
 yaml_file = "aspects.yaml"
 with open(yaml_file, 'r', encoding='utf-8') as f:
     data = yaml.safe_load(f)
-
 for aspect in data.keys():
     html_file = f"{aspect}.html"
     yaml_to_html(data, aspect, html_file)
-
 def title(aspect):
     name = data[aspect]['name']
     if name is None:
@@ -186,7 +184,7 @@ html_content = f"""
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>The Seven Deadly Sins</title>
+        <title>The Seven Capital Sins & Virtues</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="main.css" />
@@ -207,7 +205,7 @@ html_content = f"""
             <div id="wrapper">
                     <section id="home" class="wrapper style1 fullscreen fade-up">
                         <div class="inner">
-                            <h1>The Seven Deadly Sins</h1>
+                            <h1>The Seven Capital Sins & Virtues</h1>
                         </div>
                     </section>
                     <section id="sins" class="wrapper style3 fade-up">
