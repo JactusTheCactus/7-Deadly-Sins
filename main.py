@@ -74,17 +74,15 @@ def yaml_to_html(yaml_data, aspect_key, html_file):
             "Dominum"
             ]
         if data[aspect_key]['rank'] in prefixTitles:
-            rank = f"{get_gendered_rank(data[aspect_key]['rank'],data[aspect_key]['sex'])}"
             if name is None:
-                title = rank
+                title = f"{get_gendered_rank(data[aspect_key]['rank'],data[aspect_key]['sex'])}"
             else:
                 title = f"{rank} {name}"
         else:
-            rank = f"{get_gendered_rank(data[aspect_key]['rank'],data[aspect_key]['sex'])}"
             if name is None:
-                title = f"{rank}"
+                title = f"{get_gendered_rank(data[aspect_key]['rank'],data[aspect_key]['sex'])}"
             else:
-                title = f"{name}, the {rank}"
+                title = f"{name}, the {get_gendered_rank(data[aspect_key]['rank'],data[aspect_key]['sex'])}"
         return(title)
     def full(aspect_key):
         if data[aspect_key]['name'] is None:
