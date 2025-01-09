@@ -186,7 +186,7 @@ html_content = f"""
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>The Seven Capital Aspects</title>
+        <title>The Capital Aspects</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="main.css" />
