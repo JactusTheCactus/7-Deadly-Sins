@@ -103,7 +103,7 @@ def yaml_to_html(yaml_data, sin_key, html_file):
         animal = f"{data[sin_key]['animal']}"
         sin = f"{data[sin_key]['sin']}"
         sinTitle = title(sin_key)
-        fullName = f"{sinTitle}, {animal} sin of {sin}"
+        fullName = f"{sinTitle}<br>{animal} sin of {sin}"
         return fullName
     html_content = f"""
 <!DOCTYPE html>
