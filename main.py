@@ -181,14 +181,6 @@ html_content = f"""
     </head>
     <body class="is-preload">
 
-        <!-- Header -->
-        <header id="header">
-            <nav>
-                <ul>
-                </ul>
-            </nav>
-        </header>
-
         <!-- Sidebar -->
             <section id="sidebar">
                 <div class="inner">
