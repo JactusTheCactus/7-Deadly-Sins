@@ -1,193 +1,263 @@
 import yaml
-from pathlib import Path
-import re
-from html import escape
 import os
+from html import escape
+import re
+from pathlib import Path
 
-# Mapping of ranks based on sex
-rank_mapping = {
-    'Imperatore': {
-        'm': 'Imperator', 
-        'f': 'Imperatrix', 
-        'n': 'Imperatore'
-        },
-    'Venatorium': {
-        'm': 'Venator', 
-        'f': 'Venatrix', 
-        'n': 'Venatorium'
-        },
-    'Ferratorium': {
-        'm': 'Ferrator', 
-        'f': 'Ferrata', 
-        'n': 'Ferratorium'
-        },
-    'Dominum': {
-        'm': 'Dominus', 
-        'f': 'Domina', 
-        'n': 'Dominum'
-        },
-    'Luminorium': {
-        'm': 'Luminor', 
-        'f': 'Luminata', 
-        'n': 'Luminorium'
-        },
-    'Exaltum': {
-        'm': 'Exaltus', 
-        'f': 'Exalta', 
-        'n': 'Exaltum'
-        },
-    'Bellatorium': {
-        'm': 'Bellator', 
-        'f': 'Bellatrix', 
-        'n': 'Bellatorium'
-        }
-}
+# Function to ensure the value is not None before escaping
+def safe_escape(value):
+    if value is None:
+        return ""  # or return a default value like "[Unknown]"
+    return escape(str(value))
 
-def replace_rank_with_gender(data):
-    for sin, details in data.items():
-        sex = details.get("sex", "")
-        rank = details.get("rank", "")
-        
-        if rank:
-            # Determine the gendered or neutral rank
-            if sex == 'm':
-                details['rank'] = rank_mapping.get(rank, {}).get('m', rank)
-            elif sex == 'f':
-                details['rank'] = rank_mapping.get(rank, {}).get('f', rank)
-            else:
-                details['rank'] = rank_mapping.get(rank, {}).get('n', rank)
-    
-    return data
+def get_gendered_rank(rank, sex):
+    # Gender-specific rank replacements
+    if sex == "F":
+        if rank == "Imperatore":
+            return "Imperatrix"
+        elif rank == "Dominum":
+            return "Domina"  # Female equivalent for 'Dominum'
+        elif rank == "Venatorium":
+            return "Venatoria"  # Female equivalent for 'Venatorium'
+        elif rank == "Ferratorium":
+            return "Ferratoria"  # Female equivalent for 'Ferratorium'
+        elif rank == "Luminorium":
+            return "Luminoria"  # Female equivalent for 'Luminorium'
+        elif rank == "Exaltum":
+            return "Exalta"  # Female equivalent for 'Exaltum'
+        elif rank == "Bellatorium":
+            return "Bellatoria"  # Female equivalent for 'Bellatorium'
+        # Add any other specific rank changes for female here
+    elif sex == "M":
+        if rank == "Imperatore":
+            return "Imperator"
+        elif rank == "Dominum":
+            return "Dominus"  # Male equivalent for 'Dominum'
+        elif rank == "Venatorium":
+            return "Venator"  # Male equivalent for 'Venatorium'
+        elif rank == "Ferratorium":
+            return "Ferrator"  # Male equivalent for 'Ferratorium'
+        elif rank == "Luminorium":
+            return "Luminor"  # Male equivalent for 'Luminorium'
+        elif rank == "Exaltum":
+            return "Exaltus"  # Male equivalent for 'Exaltum'
+        elif rank == "Bellatorium":
+            return "Bellator"  # Male equivalent for 'Bellatorium'
+        # Add any other specific rank changes for male here
+    else:
+        # For neutral, just return rank as is
+        return rank
 
-def yaml_to_html(yaml_file, html_file):
-    with open(yaml_file, 'r', encoding='utf-8') as f:
-        data = yaml.safe_load(f)
-        name = data.get("name", "")
-        animal = data.get("animal", "")
-        sin = data.get("sin", "")
-        weapon = data.get("weapon", "")
-        colour = data.get("colour", "")
-        power = data.get("power", "")
-        species = data.get("species", "")
-        rank = data.get("rank", "")
-    
-    fullName = f"{name}, The {animal} Sin of {sin}, {rank} of The Seven Deadly Sins"
-    html_content = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-    body {{
-        font-family: Arial, sans-serif;
-        margin: 0rem 5rem 0rem;
-        font-size: 1.5rem;
-        word-wrap: break-word;
-        font-weight: bold;
-    }}
-    .title {{
-        font-size: 5rem;
-        text-decoration: underline;
-    }}
-    </style>
-    <title>{escape(sin)}</title>
-    <meta charset='UTF-8'>
-    </head>
-    <body>
-        <p class="title">
-            {escape(fullName)}
-        </p>
-        <p>
-            Weapon: <u>{escape(weapon)}</u>
-            <br>
-            Colour: <u>{escape(colour)}</u>
-            <br>
-            Power: {escape(power)}
-            <br>
-            Species: {escape(species)}
-        </p>
-        <b><a href='site/home.html'>Home</a></b>
-    </body>
+def full(sin):
+    if data[sin]['name'] is not None:
+        name = f"{data[sin]['name']}"
+    else:
+        name = f"{sin.capitalize()}"
+    name = f"{name}"
+    rank = f"{data[sin]['rank']}"
+    prefixTitles = ["Imperatore","Dominum"]
+    if rank in prefixTitles:
+        title = f"{rank} {name}"
+    else: title = f"{name}, the {rank}"
+    rank = f"{get_gendered_rank(data[sin]['rank'],data[sin]['sex'])}"
+    animal = f"{data[sin]['animal']}"
+    sin = f"{data[sin]['sin']}"
+    fullName = f"{title}, {animal} sin of {sin}"
+    return fullName
+
+def yaml_to_html(yaml_data, sin_key, html_file):
+    sin_data = yaml_data.get(sin_key, {})
+    name = sin_data.get("name","")
+    if name == "" or name is None: name = "[NAME]"
+    animal = sin_data.get("animal","")
+    if animal == "" or animal is None: animal = "[ANIMAL]"
+    sin = sin_data.get("sin","")
+    if sin == "" or sin is None: sin = "[SIN]"
+    weapon = sin_data.get("weapon","")
+    if weapon == "" or weapon is None: weapon = "[WEAPON]"
+    colour = sin_data.get("colour","")
+    if colour == "" or colour is None: colour = "[COLOUR]"
+    power = sin_data.get("power","")
+    if power == "" or power is None: power = "[POWER]"
+    species = sin_data.get("species","")
+    if species == "" or species is None: species = "[SPECIES]"
+    sex = sin_data.get("sex","")
+    if sex == "f": pronouns = ["she", "her", "hers"]
+    elif sex == "m": pronouns = ["he", "him", "his"]
+    else: pronouns = ["they", "them", "theirs"]
+    rank = sin_data.get("rank","")
+    if rank == "" or rank is None: rank = "[RANK]"
+
+    html_content = f"""
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{escape(sin)}</title>
+		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../main.css" />
+		<noscript><link rel="stylesheet" href="../noscript.css" /></noscript>
+
+		<style>
+			.mono {{
+				font-size: 1.5em;
+				font-weight: bold;
+                white-space: pre;
+                font-family: monospace;
+                margin-top: -3em;
+                margin-left: -15em;
+			}}
+		</style>
+	</head>
+	<body class="is-preload">
+			<header id="header">
+				<a href="../index.html#sins" class="title" style="font-family: monospace;"><-Back</a>
+			</header>
+			<div id="wrapper">
+					<section id="main" class="wrapper">
+						<div class="inner">
+							<h1 class="major">{escape(full(sin.lower()))}</h1>
+							<p class="mono">
+                                Species:        {escape(species)}
+                                Superpower:     {escape(power)}
+                                Gear-Colour:    {escape(colour)}
+                                Weapon:         {escape(weapon)}
+                            </p>
+						</div>
+					</section>
+			</div>
+			<script src="jquery.min.js"></script>
+			<script src="jquery.scrollex.min.js"></script>
+			<script src="jquery.scrolly.min.js"></script>
+			<script src="browser.min.js"></script>
+			<script src="breakpoints.min.js"></script>
+			<script src="util.js"></script>
+			<script src="main.js"></script>
+	</body>
 </html>
     """
     html_content = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', html_content)
     html_content = re.sub(r'\*(.*?)\*', r'<i>\1</i>', html_content)
     with open(html_file, 'w', encoding='utf-8') as f:
         f.write(html_content)
+    
 
-sinHTML = [item.name for item in Path("site/sins").iterdir()]
-home_html = f"""
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {{
-            font-family: Arial, sans-serif;
-            margin: 1rem 5rem 0rem;
-            font-size: 1.5rem;
-        }}
-        h1 {{
-            font-size: 5rem;
-        }}
-    </style>
-    <title>Home</title>
-</head>
-<body>
-    <h1>Home</h1>
-"""
-for i in range(7):
-    home_html += f"<li><a href='site/{sinHTML[i]}'>{sinHTML[i][:-5].capitalize()}</a></li>"
-home_html += """
-</body>
+def createfile(directory,name,type,content):
+	name = f"{name}.{type}"
+	with open(f"{directory}/{name}", "w") as file:
+		file.write(content)
+
+yaml_file = "site/sins.yaml"
+with open(yaml_file, 'r', encoding='utf-8') as f:
+    data = yaml.safe_load(f)
+
+sinHTML =  [
+     "envy",
+     "gluttony",
+     "greed",
+     "lust",
+     "pride",
+     "sloth",
+     "wrath"
+     ]
+for sin in sinHTML:
+    html_file = f"site/sins/{sin}.html"
+    yaml_to_html(data, sin, html_file)
+
+# Define the HTML structure as a multi-line string
+html_content = f"""
+<!DOCTYPE HTML>
+<!--
+    Hyperspace by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+        <title>The Seven Deadly Sins</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="main.css" />
+        <noscript><link rel="stylesheet" href="noscript.css" /></noscript>
+    </head>
+    <body class="is-preload">
+
+        <!-- Header -->
+        <header id="header">
+            <a href="#home" class="title">Hyperspace</a>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Sidebar -->
+            <section id="sidebar">
+                <div class="inner">
+                    <nav>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#sins">The Sins</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </section>
+
+        <!-- Wrapper -->
+            <div id="wrapper">
+
+                <!-- Intro -->
+                    <section id="home" class="wrapper style1 fullscreen fade-up">
+                        <div class="inner">
+                            <h1>The Seven Deadly Sins</h1>
+                            <p><!--Description--></p>
+                        </div>
+                    </section>
+
+                <!-- The Sins -->
+                    <section id="sins" class="wrapper style3 fade-up">
+                        <div class="inner">
+                            <p><!--Description--></p>
+                            <div class="features">
+                                <!-- Icons
+                                 <span class="icon solid major fa-code"></span>
+                                 <span class="icon solid major fa-lock"></span>
+                                 <span class="icon solid major fa-cog"></span>
+                                 <span class="icon solid major fa-desktop"></span>
+                                 <span class="icon solid major fa-link"></span>
+                                 <span class="icon major fa-gem"></span>
+                                 -->
+                                <section>
+                                    <h3><a href="sins/envy.html" id="envy" class="button primary fit">{escape(full('envy'))}</a></h3>
+                                    <h3><a href="sins/gluttony.html" id="gluttony" class="button primary fit">{escape(full('gluttony'))}</a></h3>
+                                    <h3><a href="sins/greed.html" id="greed" class="button primary fit">{escape(full('greed'))}</a></h3>
+                                    <h3><a href="sins/lust.html" id="lust" class="button primary fit">{escape(full('lust'))}</a></h3>
+                                    <h3><a href="sins/pride.html" id="pride" class="button primary fit">{escape(full('pride'))}</a></h3>
+                                    <h3><a href="sins/sloth.html" id="sloth" class="button primary fit">{escape(full('sloth'))}</a></h3>
+                                    <h3><a href="sins/wrath.html" id="wrath" class="button primary fit">{escape(full('wrath'))}</a></h3>
+                                </section>
+                            </div>
+                        </div>
+                    </section>
+
+            </div>
+
+        <!-- Scripts -->
+            <script src="jquery.min.js"></script>
+            <script src="jquery.scrollex.min.js"></script>
+            <script src="jquery.scrolly.min.js"></script>
+            <script src="browser.min.js"></script>
+            <script src="breakpoints.min.js"></script>
+            <script src="util.js"></script>
+            <script src="main.js"></script>
+
+    </body>
 </html>
 """
-with open("site/home.html", "w", encoding="utf-8") as file:
-    file.write(home_html)
 
-def createfile(directory, name, type, content):
-    name = f"{name}.{type}"
-    with open(f"{directory}/{name}", "w") as file:
-        file.write(content)
+# Define the output file name
+file_name = "site/index.html"
 
-def yaml_to_md_table(data, yaml_file, html_file):
-    table_rows = []
-    # Remove the nested loop that causes repetition
-    for sin, details in data.items():
-        if sin == "ranks":  # Skip processing ranks if it's not part of the table
-            continue
-        # Extract the details
-        name = details.get("name", "Unknown")
-        animal = details.get("animal", "Unknown")
-        sin_type = details.get("sin", "Unknown")
-        weapon = details.get("weapon", "Unknown")
-        colour = details.get("colour", "Unknown")
-        power = details.get("power", "Unknown")
-        species = details.get("species", "Unknown")
-        sex = details.get("sex", "Unknown")
-        rank = details.get("rank", "Unknown")
-        row = f"|{name}|{sin_type}|{animal}|{weapon}|{colour}|{power}|{species}|{rank}|"
-        table_rows.append(row)
-
-    # Prepare markdown content
-    table_header = "|Name|Sin|Mark|Weapon|Colour|Power|Species|Rank|\n|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n"
-    table_footer = "\n[Home](site/home.html)"
-    md_content = f"There are __Seven Deadly Sins__. Here is a table:\n\n{table_header}{'\n'.join(table_rows)}\n\n{table_footer}"
-    
-    # Write the markdown file
-    createfile("./", "README", "md", md_content)
-
-# Read the YAML data, apply the rank update, and generate the HTML and MD files
-for i in range(7):
-    yaml_file = f"site/sins.yaml"
-    html_file = f"site/sins/{sinHTML[i]}"
-    with open(yaml_file, 'r', encoding='utf-8') as f:
-        data = yaml.safe_load(f)
-        data = replace_rank_with_gender(data)  # Replace the rank with the gendered one
-
-    yaml_to_html(yaml_file, html_file)
-    yaml_to_md_table(data, "site/sins.yaml", html_file)
-
-with open("site/home.html", "w", encoding="utf-8") as file:
-    file.write(home_html)
+# Write the HTML content to the file
+with open(file_name, "w") as file:
+    file.write(html_content)
