@@ -204,7 +204,9 @@ html_content = f"""
 html_content += f"""
             <section id="aspect" class="wrapper style1 fullscreen fade-up">
                 <div class="inner">
-                    <h1>The Capital Aspects</h1>
+                    <h1 style="font-size: 10rem;">
+                        The Capital Aspects
+                    </h1>
                 </div>
             </section>
 """
