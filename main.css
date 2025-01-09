@@ -1849,7 +1849,7 @@ input, select, textarea {
 		text-align: center;
 		text-decoration: none;
 		text-transform: uppercase;
-		white-space: nowrap;
+		white-space: normal;
 	}
 
 		input[type="submit"]:after,
