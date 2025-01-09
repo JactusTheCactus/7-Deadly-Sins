@@ -106,7 +106,7 @@ def yaml_to_html(yaml_file, html_file):
             <br>
             Species: {escape(species)}
         </p>
-        <b><a href='../../home/home.html'>Home</a></b>
+        <b><a href='site/home.html'>Home</a></b>
     </body>
 </html>
     """
@@ -115,7 +115,7 @@ def yaml_to_html(yaml_file, html_file):
     with open(html_file, 'w', encoding='utf-8') as f:
         f.write(html_content)
 
-sinHTML = [item.name for item in Path("sins/sins").iterdir()]
+sinHTML = [item.name for item in Path("site/sins").iterdir()]
 home_html = f"""
 <!DOCTYPE html>
 <html lang="en">
@@ -138,12 +138,12 @@ home_html = f"""
     <h1>Home</h1>
 """
 for i in range(7):
-    home_html += f"<li><a href='sins/{sinHTML[i]}'>{sinHTML[i][:-5].capitalize()}</a></li>"
+    home_html += f"<li><a href='site/{sinHTML[i]}'>{sinHTML[i][:-5].capitalize()}</a></li>"
 home_html += """
 </body>
 </html>
 """
-with open("home.html", "w", encoding="utf-8") as file:
+with open("site/home.html", "w", encoding="utf-8") as file:
     file.write(home_html)
 
 def createfile(directory, name, type, content):
@@ -172,7 +172,7 @@ def yaml_to_md_table(data, yaml_file, html_file):
 
     # Prepare markdown content
     table_header = "|Name|Sin|Mark|Weapon|Colour|Power|Species|Rank|\n|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|\n"
-    table_footer = "\n[Home](home.html)"
+    table_footer = "\n[Home](site/home.html)"
     md_content = f"There are __Seven Deadly Sins__. Here is a table:\n\n{table_header}{'\n'.join(table_rows)}\n\n{table_footer}"
     
     # Write the markdown file
@@ -180,14 +180,14 @@ def yaml_to_md_table(data, yaml_file, html_file):
 
 # Read the YAML data, apply the rank update, and generate the HTML and MD files
 for i in range(7):
-    yaml_file = f"sins/sins.yaml"
-    html_file = f"sins/sins/{sinHTML[i]}"
+    yaml_file = f"site/sins.yaml"
+    html_file = f"site/sins/{sinHTML[i]}"
     with open(yaml_file, 'r', encoding='utf-8') as f:
         data = yaml.safe_load(f)
         data = replace_rank_with_gender(data)  # Replace the rank with the gendered one
 
     yaml_to_html(yaml_file, html_file)
-    yaml_to_md_table(data, "sins/sins.yaml", html_file)
+    yaml_to_md_table(data, "site/sins.yaml", html_file)
 
-with open("home.html", "w", encoding="utf-8") as file:
+with open("site/home.html", "w", encoding="utf-8") as file:
     file.write(home_html)

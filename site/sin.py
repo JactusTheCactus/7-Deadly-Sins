@@ -76,13 +76,14 @@ def yaml_to_html(yaml_data, sin_key, html_file):
     rank = sin_data.get("rank","")
     if rank == "" or rank is None: rank = "[RANK]"
 
-    html_content = f"""<!DOCTYPE html>
+    html_content = f"""
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>{escape(sin)}</title>
 		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="main.css" />
-		<noscript><link rel="stylesheet" href="noscript.css" /></noscript>
+		<link rel="stylesheet" href="../main.css" />
+		<noscript><link rel="stylesheet" href="../noscript.css" /></noscript>
 
 		<style>
 			.mono {{
@@ -97,7 +98,7 @@ def yaml_to_html(yaml_data, sin_key, html_file):
 	</head>
 	<body class="is-preload">
 			<header id="header">
-				<a href="seven_deadly_sins.html#home" class="title" style="font-family: monospace;"><-Back</a>
+				<a href="../seven_deadly_sins.html#home" class="title" style="font-family: monospace;"><-Back</a>
 			</header>
 			<div id="wrapper">
 					<section id="main" class="wrapper">
@@ -133,7 +134,7 @@ def createfile(directory,name,type,content):
 	with open(f"{directory}/{name}", "w") as file:
 		file.write(content)
 
-yaml_file = "sins/sins.yaml"
+yaml_file = "site/sins.yaml"
 with open(yaml_file, 'r', encoding='utf-8') as f:
     data = yaml.safe_load(f)
 
@@ -147,7 +148,7 @@ sinHTML =  [
      "wrath"
      ]
 for sin in sinHTML:
-    html_file = f"{sin}.html"
+    html_file = f"site/sins/{sin}.html"
     yaml_to_html(data, sin, html_file)
 
 # Define the HTML structure as a multi-line string
@@ -215,13 +216,13 @@ html_content = f"""
                                  <span class="icon major fa-gem"></span>
                                  -->
                                 <section>
-                                    <h3><a href="envy.html" class="button primary fit">{escape(full('envy'))}</a></h3>
-                                    <h3><a href="gluttony.html" class="button primary fit">{escape(full('gluttony'))}</a></h3>
-                                    <h3><a href="greed.html" class="button primary fit">{escape(full('greed'))}</a></h3>
-                                    <h3><a href="lust.html" class="button primary fit">{escape(full('lust'))}</a></h3>
-                                    <h3><a href="pride.html" class="button primary fit">{escape(full('pride'))}</a></h3>
-                                    <h3><a href="sloth.html" class="button primary fit">{escape(full('sloth'))}</a></h3>
-                                    <h3><a href="wrath.html" class="button primary fit">{escape(full('wrath'))}</a></h3>
+                                    <h3><a href="sins/envy.html" class="button primary fit">{escape(full('envy'))}</a></h3>
+                                    <h3><a href="sins/gluttony.html" class="button primary fit">{escape(full('gluttony'))}</a></h3>
+                                    <h3><a href="sins/greed.html" class="button primary fit">{escape(full('greed'))}</a></h3>
+                                    <h3><a href="sins/lust.html" class="button primary fit">{escape(full('lust'))}</a></h3>
+                                    <h3><a href="sins/pride.html" class="button primary fit">{escape(full('pride'))}</a></h3>
+                                    <h3><a href="sins/sloth.html" class="button primary fit">{escape(full('sloth'))}</a></h3>
+                                    <h3><a href="sins/wrath.html" class="button primary fit">{escape(full('wrath'))}</a></h3>
                                 </section>
                             </div>
                         </div>
@@ -243,7 +244,7 @@ html_content = f"""
 """
 
 # Define the output file name
-file_name = "seven_deadly_sins.html"
+file_name = "site/seven_deadly_sins.html"
 
 # Write the HTML content to the file
 with open(file_name, "w") as file:

@@ -11,4 +11,4 @@ There are __Seven Deadly Sins__. Here is a table:
 |Riven|Wrath|Kraken|Chain-Whip|Red|Apocalyptic-Strength|Demon|Bellatrix|
 
 
-[Home](home.html)
+[Home](site/home.html)
