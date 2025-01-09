@@ -197,7 +197,7 @@ html_content = f"""
                 <div class="inner">
                     <nav>
                         <ul>
-                            <li><a href="#home">Home</a></li>
+                            <li><a href="#aspect">The Capital Aspects</a></li>
                             <li><a href="#sin">The Seven Deadly Sins</a></li>
                             <li><a href="#virtue">The Seven Heavenly Virtues</a></li>
                         </ul>
@@ -205,7 +205,7 @@ html_content = f"""
                 </div>
             </section>
             <div id="wrapper">
-                    <section id="home" class="wrapper style1 fullscreen fade-up">
+                    <section id="aspect" class="wrapper style1 fullscreen fade-up">
                         <div class="inner">
                             <h1>The Capital Aspects</h1>
                         </div>
