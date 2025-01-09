@@ -121,7 +121,7 @@ def yaml_to_html(yaml_data, aspect_key, html_file):
 	</head>
 	<body class="is-preload">
 			<header id="header">
-				<a href="index.html#sins" class="title" style="font-family: monospace;"><-Back</a>
+				<a href="index.html#{escape(data[aspect_key]['alignment'].lower())}" class="title" style="font-family: monospace;"><-Back</a>
 			</header>
 			<div id="wrapper">
 					<section id="main" class="wrapper">
