@@ -47,6 +47,8 @@ def get_gendered_rank(rank, sex):
         return rank
 def yaml_to_html(yaml_data, aspect_key, html_file):
     aspect_data = yaml_data.get(aspect_key, {})
+    inverse = safe_escape(aspect_data.get("inverse",""))
+    if inverse == "" or inverse is None: inverse = "[Inverse]"
     alignment = safe_escape(aspect_data.get("alignment",""))
     if alignment == "" or alignment is None: alignment = "[Alignment]"
     name = safe_escape(aspect_data.get("name",""))
@@ -121,6 +123,8 @@ def title(aspect):
             title = rank
         else:
             title = f"{rank} {name}"
+    elif rank == "":
+        return name
     else:
         rank = get_gendered_rank(rank,sex)
         if name is None:
@@ -133,13 +137,15 @@ def full(aspect_key):
             name = f"{data[aspect_key]['aspect']}"
         else:
             name = data[aspect_key]['name']
-        name = f"{name}"
         rank = f"{data[aspect_key]['rank']}"
         animal = f"{data[aspect_key]['animal']}"
         aspect = f"{data[aspect_key]['aspect']}"
         aspectTitle = title(aspect_key)
         alignment = data[aspect_key]['alignment']
-        fullaspect = f"{animal} {alignment} of {aspect}"
+        if animal == "None":
+            fullaspect = f"{alignment} of {aspect}"
+        else:
+            fullaspect = f"{animal} {alignment} of {aspect}"
         fullName = f"{aspectTitle}, {fullaspect}"
         return fullName
 
@@ -202,80 +208,56 @@ html_content += f"""
                 </div>
             </section>
 """
-html_content += f"""
-            <section id="sin" class="wrapper style3 fade-up">
+def genAspect(aspectAlignment):
+    global html_content
+    if aspectAlignment == "sin":
+        group = "The Seven Deadly Sins"
+        list = sinList
+    else:
+        group = "The Seven Heavenly Virtues"
+        list = virtueList
+    html_content += f"""
+            <section id="{aspectAlignment}" class="wrapper style3 fade-up">
                 <div class="inner">
-                    <h1>The Seven Deadly Sins</h1>
+                    <h1>{escape(group)}</h1>
                     <div class="features">
                         <section>
 """
-for i in range(len(sinList)):
-    aspect_key = sinList[i]
-    html_content += f"""
+    for i in range(len(list)):
+        aspect_key = list[i]
+        html_content += f"""
                             <h3><a href="#{escape(aspect_key)}" class="button primary fit scrolly">{escape(title(aspect_key))}</a></h3>
 """
-html_content += f"""
+    html_content += f"""
                         </section>
                     </div>
                 </div>
             </section>
 """
-for i in range(len(sinList)):
-    aspect_key = sinList[i]
-    species = str(data[aspect_key]['species'])
-    power = str(data[aspect_key]['power'])
-    colour = str(data[aspect_key]['colour'])
-    weapon = str(data[aspect_key]['weapon'])
-    fullName = full(aspect_key)
-    html_content += f"""
-                    <section id="{escape(aspect_key)}" class="wrapper">
-						<div class="inner">
-							<h1 class="major">{escape(fullName)}</h1>
-                                Species: {escape(species)}<br>
-                                Superpower: {escape(power)}<br>
-                                Gear-Colour: {escape(colour)}<br>
-                                Weapon: {escape(weapon)}<br>
-                            </p>
-						</div>
-					</section>
-    """
-html_content += f"""
-            <section id="virtue" class="wrapper style3 fade-up">
+    for i in range(len(list)):
+        aspect_key = list[i]
+        species = str(data[aspect_key]['species'])
+        power = str(data[aspect_key]['power'])
+        colour = str(data[aspect_key]['colour'])
+        weapon = str(data[aspect_key]['weapon'])
+        def ifNone(x):
+            if x == "None": x = "N/A"
+            return x
+        fullName = full(aspect_key)
+        html_content += f"""
+            <section id="{escape(aspect_key)}" class="wrapper">
                 <div class="inner">
-                    <h1>The Seven Heavenly Virtues</h1>
-                    <div class="features">
-                        <section>
-"""
-for i in range(len(virtueList)):
-    aspect_key = virtueList[i]
-    html_content += f"""
-                            <h3><a href="#{escape(aspect_key)}" class="button primary fit scrolly">{escape(title(aspect_key))}</a></h3>
-"""
-html_content += f"""
-                        </section>
-                    </div>
+                    <h1 class="major">{escape(ifNone(fullName))}</h1>
+                        Species: {escape(ifNone(species))}<br>
+                        Superpower: {escape(ifNone(power))}<br>
+                        Gear-Colour: {escape(ifNone(colour))}<br>
+                        Weapon: {escape(ifNone(weapon))}<br>
+                    </p>
                 </div>
             </section>
 """
-for i in range(len(virtueList)):
-    aspect_key = virtueList[i]
-    species = str(data[aspect_key]['species'])
-    power = str(data[aspect_key]['power'])
-    colour = str(data[aspect_key]['colour'])
-    weapon = str(data[aspect_key]['weapon'])
-    fullName = full(aspect_key)
-    html_content += f"""
-                    <section id="{escape(aspect_key)}" class="wrapper">
-						<div class="inner">
-							<h1 class="major">{escape(fullName)}</h1>
-                                Species: {escape(species)}<br>
-                                Superpower: {escape(power)}<br>
-                                Gear-Colour: {escape(colour)}<br>
-                                Weapon: {escape(weapon)}<br>
-                            </p>
-						</div>
-					</section>
-    """
+genAspect("sin")
+genAspect("virtue")
 html_content += f"""
             </div>
             <script src="jquery.min.js"></script>
