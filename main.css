@@ -1838,7 +1838,7 @@ input, select, textarea {
 		color: #ffffff !important;
 		cursor: pointer;
 		display: inline-block;
-		font-size: 1.25em;
+		font-size: 1em;
 		font-weight: bold;
 		height: auto;
 		letter-spacing: 0.25em;
