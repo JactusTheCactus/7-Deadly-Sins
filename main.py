@@ -207,7 +207,7 @@ html_content = f"""
             <div id="wrapper">
                     <section id="home" class="wrapper style1 fullscreen fade-up">
                         <div class="inner">
-                            <h1>The Seven Capital Aspects</h1>
+                            <h1>The Capital Aspects</h1>
                         </div>
                     </section>
                     <section id="sin" class="wrapper style3 fade-up">
