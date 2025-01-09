@@ -1,7 +1,7 @@
 envy:
   name:
   animal: Gorgon
-  sin: Envy
+  aspect: Envy
   weapon: Staff
   colour: Blue
   power: Mimic
@@ -11,7 +11,7 @@ envy:
 gluttony:
   name:
   animal: Hydra
-  sin: Gluttony
+  aspect: Gluttony
   weapon: Battleaxe
   colour: Purple
   power: Absorbtion
@@ -21,7 +21,7 @@ gluttony:
 greed:
   name:
   animal: Dragon
-  sin: Greed
+  aspect: Greed
   weapon: Warhammer
   colour: Green
   power: Ferrokinesis
@@ -31,7 +31,7 @@ greed:
 lust:
   name:
   animal: Siren
-  sin: Lust
+  aspect: Lust
   weapon: Daggers
   colour: Pink
   power: Illusion
@@ -41,7 +41,7 @@ lust:
 pride:
   name:
   animal: Phoenix
-  sin: Pride
+  aspect: Pride
   weapon: Sword
   colour: Yellow
   power: Immolation
@@ -51,7 +51,7 @@ pride:
 sloth:
   name:
   animal: Sphinx
-  sin: Sloth
+  aspect: Sloth
   weapon: Mace
   colour: Orange
   power: Paralysis
@@ -61,10 +61,80 @@ sloth:
 wrath:
   name: Riven
   animal: Kraken
-  sin: Wrath
+  aspect: Wrath
   weapon: Chain-Whip
   colour: Red
   power: Apocalyptic-Strength
   species: Demon
   sex: F
   rank: Bellatorium
+charity:
+  name:
+  animal:
+  aspect: Charity
+  weapon:
+  colour:
+  power:
+  species:
+  sex:
+  rank:
+chastity:
+  name:
+  animal:
+  aspect: Chastity
+  weapon:
+  colour:
+  power:
+  species:
+  sex:
+  rank:
+diligence:
+  name:
+  animal:
+  aspect: Diligence
+  weapon:
+  colour:
+  power:
+  species:
+  sex:
+  rank:
+kindness:
+  name:
+  animal:
+  aspect: Kindness
+  weapon:
+  colour:
+  power:
+  species:
+  sex:
+  rank:
+humility:
+  name:
+  animal:
+  aspect: Humility
+  weapon:
+  colour:
+  power:
+  species:
+  sex:
+  rank:
+patience:
+  name:
+  animal:
+  aspect: Patience
+  weapon:
+  colour:
+  power:
+  species:
+  sex:
+  rank:
+temperance:
+  name:
+  animal:
+  aspect: Temperance
+  weapon:
+  colour:
+  power:
+  species:
+  sex:
+  rank:

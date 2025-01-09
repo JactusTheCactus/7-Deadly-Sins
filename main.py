@@ -3,13 +3,11 @@ import os
 from html import escape
 import re
 from pathlib import Path
-
 # Function to ensure the value is not None before escaping
 def safe_escape(value):
     if value is None:
         return ""  # or return a default value like "[Unknown]"
     return escape(str(value))
-
 def get_gendered_rank(rank, sex):
     # Gender-specific rank replacements
     if sex == "F":
@@ -47,74 +45,68 @@ def get_gendered_rank(rank, sex):
     else:
         # For neutral, just return rank as is
         return rank
-
-
-
-
-
-def yaml_to_html(yaml_data, sin_key, html_file):
-    sin_data = yaml_data.get(sin_key, {})
-    name = sin_data.get("name","")
+def yaml_to_html(yaml_data, aspect_key, html_file):
+    aspect_data = yaml_data.get(aspect_key, {})
+    name = safe_escape(aspect_data.get("name",""))
     if name == "" or name is None: name = "[NAME]"
-    animal = sin_data.get("animal","")
+    animal = safe_escape(aspect_data.get("animal",""))
     if animal == "" or animal is None: animal = "[ANIMAL]"
-    sin = sin_data.get("sin","")
-    if sin == "" or sin is None: sin = "[SIN]"
-    weapon = sin_data.get("weapon","")
+    aspect = safe_escape(aspect_data.get("aspect",""))
+    if aspect == "" or aspect is None: aspect = "[ASPECT]"
+    weapon = safe_escape(aspect_data.get("weapon",""))
     if weapon == "" or weapon is None: weapon = "[WEAPON]"
-    colour = sin_data.get("colour","")
+    colour = safe_escape(aspect_data.get("colour",""))
     if colour == "" or colour is None: colour = "[COLOUR]"
-    power = sin_data.get("power","")
+    power = safe_escape(aspect_data.get("power",""))
     if power == "" or power is None: power = "[POWER]"
-    species = sin_data.get("species","")
+    species = safe_escape(aspect_data.get("species",""))
     if species == "" or species is None: species = "[SPECIES]"
-    sex = sin_data.get("sex","")
+    sex = safe_escape(aspect_data.get("sex",""))
     if sex == "f": pronouns = ["she", "her", "hers"]
     elif sex == "m": pronouns = ["he", "him", "his"]
     else: pronouns = ["they", "them", "theirs"]
-    rank = sin_data.get("rank","")
+    rank = safe_escape(aspect_data.get("rank",""))
     if rank == "" or rank is None: rank = "[RANK]"
-    def title(sin_key):
-        name = data[sin_key]['name']
+    def title(aspect_key):
+        name = data[aspect_key]['name']
         prefixTitles = [
             "Imperatore",
             "Dominum"
             ]
-        if data[sin_key]['rank'] in prefixTitles:
-            rank = f"{get_gendered_rank(data[sin_key]['rank'],data[sin_key]['sex'])}"
+        if data[aspect_key]['rank'] in prefixTitles:
+            rank = f"{get_gendered_rank(data[aspect_key]['rank'],data[aspect_key]['sex'])}"
             if name is None:
                 title = rank
             else:
                 title = f"{rank} {name}"
         else:
-            rank = f"{get_gendered_rank(data[sin_key]['rank'],data[sin_key]['sex'])}"
+            rank = f"{get_gendered_rank(data[aspect_key]['rank'],data[aspect_key]['sex'])}"
             if name is None:
                 title = f"{rank}"
             else:
                 title = f"{name}, the {rank}"
         return(title)
-    def full(sin_key):
-        if data[sin_key]['name'] is None:
-            name = f"{data[sin_key]['sin']}"
+    def full(aspect_key):
+        if data[aspect_key]['name'] is None:
+            name = f"{data[aspect_key]['aspect']}"
         else:
-            name = data[sin_key]['name']
+            name = data[aspect_key]['name']
         name = f"{name}"
-        rank = f"{data[sin_key]['rank']}"
-        animal = f"{data[sin_key]['animal']}"
-        sin = f"{data[sin_key]['sin']}"
-        sinTitle = title(sin_key)
-        fullSin = f"{animal} sin of {sin}"
-        fullName = f"{sinTitle}, {fullSin}"
+        rank = f"{data[aspect_key]['rank']}"
+        animal = f"{data[aspect_key]['animal']}"
+        aspect = f"{data[aspect_key]['aspect']}"
+        aspectTitle = title(aspect_key)
+        fullaspect = f"{animal} aspect of {aspect}"
+        fullName = f"{aspectTitle}, {fullaspect}"
         return fullName
     html_content = f"""
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>{escape(sin)}</title>
+		<title>{escape(aspect)}</title>
 		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="main.css" />
 		<noscript><link rel="stylesheet" href="noscript.css" /></noscript>
-
 		<style>
 			.mono {{
 				font-size: 1.5em;
@@ -133,11 +125,11 @@ def yaml_to_html(yaml_data, sin_key, html_file):
 			<div id="wrapper">
 					<section id="main" class="wrapper">
 						<div class="inner">
-							<h1 class="major">{escape(full(sin.lower()))}</h1>
-                                Species: {escape(str(data[sin_key]['species']))}<br>
-                                Superpower: {escape(str(data[sin_key]['power']))}<br>
-                                Gear-Colour: {escape(str(data[sin_key]['colour']))}<br>
-                                Weapon: {escape(str(data[sin_key]['weapon']))}<br>
+							<h1 class="major">{escape(full(aspect.lower()))}</h1>
+                                Species: {escape(str(data[aspect_key]['species']))}<br>
+                                Superpower: {escape(str(data[aspect_key]['power']))}<br>
+                                Gear-Colour: {escape(str(data[aspect_key]['colour']))}<br>
+                                Weapon: {escape(str(data[aspect_key]['weapon']))}<br>
                             </p>
 						</div>
 					</section>
@@ -156,34 +148,26 @@ def yaml_to_html(yaml_data, sin_key, html_file):
     html_content = re.sub(r'\*(.*?)\*', r'<i>\1</i>', html_content)
     with open(html_file, 'w', encoding='utf-8') as f:
         f.write(html_content)
-    
-
 def createfile(directory,name,type,content):
 	name = f"{name}.{type}"
 	with open(f"{directory}/{name}", "w") as file:
 		file.write(content)
-
-yaml_file = "sins.yaml"
+yaml_file = "aspects.yaml"
 with open(yaml_file, 'r', encoding='utf-8') as f:
     data = yaml.safe_load(f)
 
-sinHTML =  [
-     "envy",
-     "gluttony",
-     "greed",
-     "lust",
-     "pride",
-     "sloth",
-     "wrath"
-     ]
-for sin in sinHTML:
-    html_file = f"{sin}.html"
-    yaml_to_html(data, sin, html_file)
+for aspect in data.keys():
+    html_file = f"{aspect}.html"
+    yaml_to_html(data, aspect, html_file)
 
-def title(sin):
-    name = data[sin]['name']
-    rank = data[sin]['rank']
-    sex = data[sin]['sex']
+def title(aspect):
+    name = data[aspect]['name']
+    if name is None:
+        name = data[aspect]['aspect']
+    rank = data[aspect]['rank']
+    if rank is None:
+        rank = ""
+    sex = data[aspect]['sex']
     prefixTitles = ["Imperatore","Dominum"]
     rank = get_gendered_rank(rank,sex)
     if rank in prefixTitles:
@@ -197,15 +181,9 @@ def title(sin):
         else:
             title = f"{name}, the {rank}"
     return title
-
 # Define the HTML structure as a multi-line string
 html_content = f"""
 <!DOCTYPE HTML>
-<!--
-    Hyperspace by HTML5 UP
-    html5up.net | @ajlkn
-    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
     <head>
         <title>The Seven Deadly Sins</title>
@@ -215,43 +193,26 @@ html_content = f"""
         <noscript><link rel="stylesheet" href="noscript.css" /></noscript>
     </head>
     <body class="is-preload">
-
-        <!-- Sidebar -->
             <section id="sidebar">
                 <div class="inner">
                     <nav>
                         <ul>
                             <li><a href="#home">Home</a></li>
-                            <li><a href="#sins">The Sins</a></li>
+                            <li><a href="#sins">The Seven Deadly Sins</a></li>
+                            <li><a href="#virtues">The Seven Heavenly Virtues</a></li>
                         </ul>
                     </nav>
                 </div>
             </section>
-
-        <!-- Wrapper -->
             <div id="wrapper">
-
-                <!-- Intro -->
                     <section id="home" class="wrapper style1 fullscreen fade-up">
                         <div class="inner">
                             <h1>The Seven Deadly Sins</h1>
-                            <p><!--Description--></p>
                         </div>
                     </section>
-
-                <!-- The Sins -->
                     <section id="sins" class="wrapper style3 fade-up">
                         <div class="inner">
-                            <p><!--Description--></p>
                             <div class="features">
-                                <!-- Icons
-                                 <span class="icon solid major fa-code"></span>
-                                 <span class="icon solid major fa-lock"></span>
-                                 <span class="icon solid major fa-cog"></span>
-                                 <span class="icon solid major fa-desktop"></span>
-                                 <span class="icon solid major fa-link"></span>
-                                 <span class="icon major fa-gem"></span>
-                                 -->
                                 <section>
                                     <h3><a href="envy.html" id="envy" class="button primary fit">{escape(title('envy'))}</a></h3>
                                     <h3><a href="gluttony.html" id="gluttony" class="button primary fit">{escape(title('gluttony'))}</a></h3>
@@ -264,10 +225,22 @@ html_content = f"""
                             </div>
                         </div>
                     </section>
-
+                    <section id="virtues" class="wrapper style3 fade-up">
+                        <div class="inner">
+                            <div class="features">
+                                <section>
+                                    <h3><a href="charity.html" id="charity" class="button primary fit">{escape(title('charity'))}</a></h3>
+                                    <h3><a href="chastity.html" id="chastity" class="button primary fit">{escape(title('chastity'))}</a></h3>
+                                    <h3><a href="diligence.html" id="diligence" class="button primary fit">{escape(title('diligence'))}</a></h3>
+                                    <h3><a href="humility.html" id="humility" class="button primary fit">{escape(title('humility'))}</a></h3>
+                                    <h3><a href="kindness.html" id="kindness" class="button primary fit">{escape(title('kindness'))}</a></h3>
+                                    <h3><a href="patience.html" id="patience" class="button primary fit">{escape(title('patience'))}</a></h3>
+                                    <h3><a href="temperance.html" id="temperance" class="button primary fit">{escape(title('temperance'))}</a></h3>
+                                </section>
+                            </div>
+                        </div>
+                    </section>
             </div>
-
-        <!-- Scripts -->
             <script src="jquery.min.js"></script>
             <script src="jquery.scrollex.min.js"></script>
             <script src="jquery.scrolly.min.js"></script>
@@ -275,14 +248,11 @@ html_content = f"""
             <script src="breakpoints.min.js"></script>
             <script src="util.js"></script>
             <script src="main.js"></script>
-
     </body>
 </html>
 """
-
 # Define the output file name
 file_name = "index.html"
-
 # Write the HTML content to the file
 with open(file_name, "w") as file:
     file.write(html_content)
