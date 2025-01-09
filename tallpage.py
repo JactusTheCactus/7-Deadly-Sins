@@ -236,22 +236,23 @@ def genAspect(aspectAlignment):
 """
     for i in range(len(list)):
         aspect_key = list[i]
-        species = str(data[aspect_key]['species'])
-        power = str(data[aspect_key]['power'])
-        colour = str(data[aspect_key]['colour'])
-        weapon = str(data[aspect_key]['weapon'])
-        def ifNone(x):
+        def setData(x):
+            x = str(data[aspect_key][x])
             if x == "None": x = "N/A"
             return x
+        species = setData('species')
+        power = setData('power')
+        colour = setData('colour')
+        weapon = setData('weapon')
         fullName = full(aspect_key)
         html_content += f"""
             <section id="{escape(aspect_key)}" class="wrapper">
                 <div class="inner">
-                    <h1 class="major">{escape(ifNone(fullName))}</h1>
-                        Species: {escape(ifNone(species))}<br>
-                        Superpower: {escape(ifNone(power))}<br>
-                        Gear-Colour: {escape(ifNone(colour))}<br>
-                        Weapon: {escape(ifNone(weapon))}<br>
+                    <h1 class="major">{escape(fullName)}</h1>
+                        Species: {escape(species)}<br>
+                        Superpower: {escape(power)}<br>
+                        Gear-Colour: {escape(colour)}<br>
+                        Weapon: {escape(weapon)}<br>
                     </p>
                 </div>
             </section>
