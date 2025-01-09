@@ -133,10 +133,10 @@ def yaml_to_html(yaml_data, sin_key, html_file):
 					<section id="main" class="wrapper">
 						<div class="inner">
 							<h1 class="major">{escape(full(sin.lower()))}</h1>
-                                Species: {escape(str(data[sin_key]['species']))}
-                                Superpower: {escape(str(data[sin_key]['power']))}
-                                Gear-Colour: {escape(str(data[sin_key]['colour']))}
-                                Weapon:{escape(str(data[sin_key]['weapon']))}
+                                Species: {escape(str(data[sin_key]['species']))}<br>
+                                Superpower: {escape(str(data[sin_key]['power']))}<br>
+                                Gear-Colour: {escape(str(data[sin_key]['colour']))}<br>
+                                Weapon:{escape(str(data[sin_key]['weapon']))}<br>
                             </p>
 						</div>
 					</section>
