@@ -81,8 +81,8 @@ def yaml_to_html(yaml_data, sin_key, html_file):
 	<head>
 		<title>{escape(sin)}</title>
 		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="../assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="main.css" />
+		<noscript><link rel="stylesheet" href="noscript.css" /></noscript>
 
 		<style>
 			.mono {{
@@ -97,7 +97,7 @@ def yaml_to_html(yaml_data, sin_key, html_file):
 	</head>
 	<body class="is-preload">
 			<header id="header">
-				<a href="../seven_deadly_sins.html#home" class="title" style="font-family: monospace;"><-Back</a>
+				<a href="seven_deadly_sins.html#home" class="title" style="font-family: monospace;"><-Back</a>
 			</header>
 			<div id="wrapper">
 					<section id="main" class="wrapper">
@@ -112,13 +112,13 @@ def yaml_to_html(yaml_data, sin_key, html_file):
 						</div>
 					</section>
 			</div>
-			<script src="../assets/js/jquery.min.js"></script>
-			<script src="../assets/js/jquery.scrollex.min.js"></script>
-			<script src="../assets/js/jquery.scrolly.min.js"></script>
-			<script src="../assets/js/browser.min.js"></script>
-			<script src="../assets/js/breakpoints.min.js"></script>
-			<script src="../assets/js/util.js"></script>
-			<script src="../assets/js/main.js"></script>
+			<script src="jquery.min.js"></script>
+			<script src="jquery.scrollex.min.js"></script>
+			<script src="jquery.scrolly.min.js"></script>
+			<script src="browser.min.js"></script>
+			<script src="breakpoints.min.js"></script>
+			<script src="util.js"></script>
+			<script src="main.js"></script>
 	</body>
 </html>
     """
@@ -147,7 +147,7 @@ sinHTML =  [
      "wrath"
      ]
 for sin in sinHTML:
-    html_file = f"docs/html5up-hyperspace/sin/{sin}.html"
+    html_file = f"{sin}.html"
     yaml_to_html(data, sin, html_file)
 
 # Define the HTML structure as a multi-line string
@@ -163,8 +163,8 @@ html_content = f"""
         <title>The Seven Deadly Sins</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="assets/css/main.css" />
-        <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+        <link rel="stylesheet" href="main.css" />
+        <noscript><link rel="stylesheet" href="noscript.css" /></noscript>
     </head>
     <body class="is-preload">
 
@@ -215,13 +215,13 @@ html_content = f"""
                                  <span class="icon major fa-gem"></span>
                                  -->
                                 <section>
-                                    <h3><a href="sin/envy.html" class="button primary fit">{escape(full('envy'))}</a></h3>
-                                    <h3><a href="sin/gluttony.html" class="button primary fit">{escape(full('gluttony'))}</a></h3>
-                                    <h3><a href="sin/greed.html" class="button primary fit">{escape(full('greed'))}</a></h3>
-                                    <h3><a href="sin/lust.html" class="button primary fit">{escape(full('lust'))}</a></h3>
-                                    <h3><a href="sin/pride.html" class="button primary fit">{escape(full('pride'))}</a></h3>
-                                    <h3><a href="sin/sloth.html" class="button primary fit">{escape(full('sloth'))}</a></h3>
-                                    <h3><a href="sin/wrath.html" class="button primary fit">{escape(full('wrath'))}</a></h3>
+                                    <h3><a href="envy.html" class="button primary fit">{escape(full('envy'))}</a></h3>
+                                    <h3><a href="gluttony.html" class="button primary fit">{escape(full('gluttony'))}</a></h3>
+                                    <h3><a href="greed.html" class="button primary fit">{escape(full('greed'))}</a></h3>
+                                    <h3><a href="lust.html" class="button primary fit">{escape(full('lust'))}</a></h3>
+                                    <h3><a href="pride.html" class="button primary fit">{escape(full('pride'))}</a></h3>
+                                    <h3><a href="sloth.html" class="button primary fit">{escape(full('sloth'))}</a></h3>
+                                    <h3><a href="wrath.html" class="button primary fit">{escape(full('wrath'))}</a></h3>
                                 </section>
                             </div>
                         </div>
@@ -230,20 +230,20 @@ html_content = f"""
             </div>
 
         <!-- Scripts -->
-            <script src="assets/js/jquery.min.js"></script>
-            <script src="assets/js/jquery.scrollex.min.js"></script>
-            <script src="assets/js/jquery.scrolly.min.js"></script>
-            <script src="assets/js/browser.min.js"></script>
-            <script src="assets/js/breakpoints.min.js"></script>
-            <script src="assets/js/util.js"></script>
-            <script src="assets/js/main.js"></script>
+            <script src="jquery.min.js"></script>
+            <script src="jquery.scrollex.min.js"></script>
+            <script src="jquery.scrolly.min.js"></script>
+            <script src="browser.min.js"></script>
+            <script src="breakpoints.min.js"></script>
+            <script src="util.js"></script>
+            <script src="main.js"></script>
 
     </body>
 </html>
 """
 
 # Define the output file name
-file_name = "docs/html5up-hyperspace/seven_deadly_sins.html"
+file_name = "seven_deadly_sins.html"
 
 # Write the HTML content to the file
 with open(file_name, "w") as file:
