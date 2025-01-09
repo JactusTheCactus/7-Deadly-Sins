@@ -48,24 +48,9 @@ def get_gendered_rank(rank, sex):
         # For neutral, just return rank as is
         return rank
 
-def full(sin):
-    if data[sin]['name'] is not None:
-        name = f"{data[sin]['name']}"
-    else:
-        name = f"{sin.capitalize()}"
-    name = f"{name}"
-    rank = f"{data[sin]['rank']}"
-    rank = f"{get_gendered_rank(data[sin]['rank'],data[sin]['sex'])}"
-    animal = f"{data[sin]['animal']}"
-    sin = f"{data[sin]['sin']}"
-    fullName = f"{title}, {animal} sin of {sin}"
-    return fullName
 
-def title(sin):
-        prefixTitles = ["Imperatore","Dominum"]
-        if data[sin]['rank'] in prefixTitles:
-            title = f"{data[sin]['rank']} {data[sin]['name']}"
-        else: title = f"{data[sin]['name']}, the {data[sin]['rank']}"
+
+
 
 def yaml_to_html(yaml_data, sin_key, html_file):
     sin_data = yaml_data.get(sin_key, {})
@@ -89,6 +74,23 @@ def yaml_to_html(yaml_data, sin_key, html_file):
     else: pronouns = ["they", "them", "theirs"]
     rank = sin_data.get("rank","")
     if rank == "" or rank is None: rank = "[RANK]"
+    def title(sin):
+        prefixTitles = ["Imperatore","Dominum"]
+        if data[sin]['rank'] in prefixTitles:
+            title = f"{data[sin]['rank']} {data[sin]['name']}"
+        else: title = f"{data[sin]['name']}, the {data[sin]['rank']}"
+    def full(sin):
+        if data[sin]['name'] is not None:
+            name = f"{data[sin]['name']}"
+        else:
+            name = f"{sin.capitalize()}"
+        name = f"{name}"
+        rank = f"{data[sin]['rank']}"
+        rank = f"{get_gendered_rank(data[sin]['rank'],data[sin]['sex'])}"
+        animal = f"{data[sin]['animal']}"
+        sin = f"{data[sin]['sin']}"
+        fullName = f"{title}, {animal} sin of {sin}"
+        return fullName
 
     html_content = f"""
 <!DOCTYPE html>
@@ -165,6 +167,13 @@ for sin in sinHTML:
     html_file = f"{sin}.html"
     yaml_to_html(data, sin, html_file)
 
+def title(sin):
+    prefixTitles = ["Imperatore","Dominum"]
+    if data[sin]['rank'] in prefixTitles:
+        title = f"{data[sin]['rank']} {data[sin]['name']}"
+    else: title = f"{data[sin]['name']}, the {data[sin]['rank']}"
+    return title
+
 # Define the HTML structure as a multi-line string
 html_content = f"""
 <!DOCTYPE HTML>
@@ -220,13 +229,13 @@ html_content = f"""
                                  <span class="icon major fa-gem"></span>
                                  -->
                                 <section>
-                                    <h3><a href="envy.html" id="envy" class="button primary fit">{escape(str(title('envy')))}</a></h3>
-                                    <h3><a href="gluttony.html" id="gluttony" class="button primary fit">{escape(str(title('gluttony')))}</a></h3>
-                                    <h3><a href="greed.html" id="greed" class="button primary fit">{escape(str(title('greed')))}</a></h3>
-                                    <h3><a href="lust.html" id="lust" class="button primary fit">{escape(str(title('lust')))}</a></h3>
-                                    <h3><a href="pride.html" id="pride" class="button primary fit">{escape(str(title('pride')))}</a></h3>
-                                    <h3><a href="sloth.html" id="sloth" class="button primary fit">{escape(str(title('sloth')))}</a></h3>
-                                    <h3><a href="wrath.html" id="wrath" class="button primary fit">{escape(str(title('wrath')))}</a></h3>
+                                    <h3><a href="envy.html" id="envy" class="button primary fit">{escape(title('envy'))}</a></h3>
+                                    <h3><a href="gluttony.html" id="gluttony" class="button primary fit">{escape(title('gluttony'))}</a></h3>
+                                    <h3><a href="greed.html" id="greed" class="button primary fit">{escape(title('greed'))}</a></h3>
+                                    <h3><a href="lust.html" id="lust" class="button primary fit">{escape(title('lust'))}</a></h3>
+                                    <h3><a href="pride.html" id="pride" class="button primary fit">{escape(title('pride'))}</a></h3>
+                                    <h3><a href="sloth.html" id="sloth" class="button primary fit">{escape(title('sloth'))}</a></h3>
+                                    <h3><a href="wrath.html" id="wrath" class="button primary fit">{escape(title('wrath'))}</a></h3>
                                 </section>
                             </div>
                         </div>
