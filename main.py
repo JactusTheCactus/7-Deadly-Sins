@@ -136,7 +136,7 @@ def yaml_to_html(yaml_data, sin_key, html_file):
                                 Species: {escape(str(data[sin_key]['species']))}<br>
                                 Superpower: {escape(str(data[sin_key]['power']))}<br>
                                 Gear-Colour: {escape(str(data[sin_key]['colour']))}<br>
-                                Weapon:{escape(str(data[sin_key]['weapon']))}<br>
+                                Weapon: {escape(str(data[sin_key]['weapon']))}<br>
                             </p>
 						</div>
 					</section>
