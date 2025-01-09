@@ -1840,7 +1840,7 @@ input, select, textarea {
 		display: inline-block;
 		font-size: 0.6em;
 		font-weight: bold;
-		height: 5em;
+		height: auto;
 		letter-spacing: 0.25em;
 		line-height: 2.5em;
 		outline: 0;
