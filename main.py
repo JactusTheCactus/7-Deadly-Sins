@@ -165,13 +165,14 @@ def title(aspect):
         rank = ""
     sex = data[aspect]['sex']
     prefixTitles = ["Imperatore","Dominum"]
-    rank = get_gendered_rank(rank,sex)
     if rank in prefixTitles:
+        rank = get_gendered_rank(rank,sex)
         if name is None:
             title = rank
         else:
             title = f"{rank} {name}"
     else:
+        rank = get_gendered_rank(rank,sex)
         if name is None:
             title = rank
         else:
