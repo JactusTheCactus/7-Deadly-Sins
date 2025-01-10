@@ -205,7 +205,7 @@ def genAspect(aspectAlignment):
                         Superpower: {escape(power)}<br>
                         Gear-Colour: {escape(colour)}<br>
                         Weapon: {escape(weapon)}<br>
-                        Inverse {escape(inverseAspect.capitalize())}: <a href="#{escape(inverse)}">{escape(data[inverse]['name'])}</a>
+                        Inverse {escape(inverseAspect.capitalize())}: <a href="#{escape(inverse)}">{escape(title(inverse))}</a>
                     </p>
                 </div>
             </section>
