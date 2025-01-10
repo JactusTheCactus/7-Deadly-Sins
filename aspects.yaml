@@ -6,7 +6,7 @@ envy:
   colour: Blue
   power: Mimic
   species: Changeling
-  sex:
+  sex: F
   rank: Imperatore
   alignment: Sin
   inverse: kindness
@@ -19,7 +19,7 @@ gluttony:
   colour: Purple
   power: Absorbtion
   species:
-  sex:
+  sex: M
   rank: Venatorium
   alignment: Sin
   inverse: temperance
@@ -32,7 +32,7 @@ greed:
   colour: Green
   power: Ferrokinesis
   species:
-  sex:
+  sex: M
   rank: Ferratorium
   alignment: Sin
   inverse: charity
@@ -58,7 +58,7 @@ pride:
   colour: Yellow
   power: Immolation
   species: Elf
-  sex:
+  sex: F
   rank: Luminorium
   alignment: Sin
   inverse: humility
@@ -71,7 +71,7 @@ sloth:
   colour: Orange
   power: Paralysis
   species: Golem
-  sex:
+  sex: M
   rank: Exaltum
   alignment: Sin
   inverse: diligence
@@ -97,7 +97,7 @@ charity:
   colour:
   power:
   species:
-  sex:
+  sex: F
   rank:
   alignment: Virtue
   inverse: greed
@@ -110,7 +110,7 @@ chastity:
   colour:
   power:
   species:
-  sex:
+  sex: M
   rank:
   alignment: Virtue
   inverse: lust
@@ -123,7 +123,7 @@ diligence:
   colour:
   power:
   species:
-  sex:
+  sex: M
   rank:
   alignment: Virtue
   inverse: sloth
@@ -136,7 +136,7 @@ kindness:
   colour:
   power:
   species:
-  sex:
+  sex: F
   rank:
   alignment: Virtue
   inverse: envy
@@ -149,7 +149,7 @@ humility:
   colour:
   power:
   species:
-  sex:
+  sex: M
   rank:
   alignment: Virtue
   inverse: pride
@@ -162,7 +162,7 @@ patience:
   colour:
   power:
   species:
-  sex:
+  sex: M
   rank:
   alignment: Virtue
   inverse: wrath
@@ -175,7 +175,7 @@ temperance:
   colour:
   power:
   species:
-  sex:
+  sex: F
   rank:
   alignment: Virtue
   inverse: gluttony
