@@ -130,7 +130,7 @@ def title(aspect):
         if name is None:
             title = rank
         else:
-            title = f"{name}, the {rank}"
+            title = f"{name} {rank}"
     return title
 def full(aspect_key):
         if data[aspect_key]['name'] is None:
