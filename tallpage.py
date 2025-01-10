@@ -12,42 +12,20 @@ def safe_escape(value):
         return ""  # or return a default value like "[Unknown]"
     return escape(str(value))
 def get_gendered_rank(rank, sex):
-    # Gender-specific rank replacements
-    if sex == "F":
-        if rank == "Imperatore":
-            return "Imperatrix"
-        elif rank == "Dominum":
-            return "Domina"  # Female equivalent for 'Dominum'
-        elif rank == "Venatorium":
-            return "Venatoria"  # Female equivalent for 'Venatorium'
-        elif rank == "Ferratorium":
-            return "Ferratoria"  # Female equivalent for 'Ferratorium'
-        elif rank == "Luminorium":
-            return "Luminoria"  # Female equivalent for 'Luminorium'
-        elif rank == "Exaltum":
-            return "Exalta"  # Female equivalent for 'Exaltum'
-        elif rank == "Bellatorium":
-            return "Bellatoria"  # Female equivalent for 'Bellatorium'
-        # Add any other specific rank changes for female here
-    elif sex == "M":
-        if rank == "Imperatore":
-            return "Imperator"
-        elif rank == "Dominum":
-            return "Dominus"  # Male equivalent for 'Dominum'
-        elif rank == "Venatorium":
-            return "Venator"  # Male equivalent for 'Venatorium'
-        elif rank == "Ferratorium":
-            return "Ferrator"  # Male equivalent for 'Ferratorium'
-        elif rank == "Luminorium":
-            return "Luminor"  # Male equivalent for 'Luminorium'
-        elif rank == "Exaltum":
-            return "Exaltus"  # Male equivalent for 'Exaltum'
-        elif rank == "Bellatorium":
-            return "Bellator"  # Male equivalent for 'Bellatorium'
-        # Add any other specific rank changes for male here
-    else:
-        # For neutral, just return rank as is
-        return rank
+    # Dictionary mapping rank to its male and female versions
+    rank_map = {
+        "Imperatore": {"F": "Imperatrix", "M": "Imperator"},
+        "Dominum": {"F": "Domina", "M": "Dominus"},
+        "Venatorium": {"F": "Venatoria", "M": "Venator"},
+        "Ferratorium": {"F": "Ferratoria", "M": "Ferrator"},
+        "Luminorium": {"F": "Luminoria", "M": "Luminor"},
+        "Exaltum": {"F": "Exalta", "M": "Exaltus"},
+        "Bellatorium": {"F": "Bellatoria", "M": "Bellator"},
+    }
+    
+    # Return the appropriate rank based on sex or return the original if not in the map
+    return rank_map.get(rank, {}).get(sex, rank)
+
 def yaml_to_html(yaml_data, aspect_key):
     aspect_data = yaml_data.get(aspect_key, {})
     rank = safe_escape(aspect_data.get("rank",""))
