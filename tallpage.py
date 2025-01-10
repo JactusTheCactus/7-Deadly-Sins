@@ -110,8 +110,6 @@ def full(aspect_key):
     else:
         fullaspect = f"{animal} {alignment} of {aspect}"
     fullName = f"{aspectTitle}, {fullaspect}"
-    # if epithet is not None:
-    #     fullName += f", '{epithet}'"
     return fullName
 
 sinList = [
@@ -218,7 +216,7 @@ def genAspect(aspectAlignment):
                 <div class="inner">
                     <h1 class="major">
                         {escape(fullName)}<br>
-                        {escape(epithet)}
+                        "{escape(epithet)}"
                     </h1>
                         Species: {escape(species)}<br>
                         Superpower: {escape(power)}<br>
