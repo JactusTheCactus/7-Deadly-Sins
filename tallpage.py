@@ -110,12 +110,12 @@ for aspect in data.keys():
     yaml_to_html(data, aspect, html_file)
 def title(aspect):
     name = data[aspect]['name']
-    rank = data[aspect]['rank']
+    rank = f" {data[aspect]['rank']}"
     if rank is None:
         rank = ""
     sex = data[aspect]['sex']
     rank = get_gendered_rank(rank,sex)
-    title = f"{name} {rank}"
+    title = f"{name}{rank}"
     return title
 def full(aspect_key):
         if data[aspect_key]['name'] is None:
