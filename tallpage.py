@@ -188,7 +188,9 @@ def genAspect(aspectAlignment):
         colour = setData('colour')
         weapon = setData('weapon')
         epithet = setData('epithet')
-        if epithet != '[N/A]': epithet = f"\"{epithet}\""
+        if aspect_key == "sin": inverseAspect = "virtue"
+        else: inverseAspect = "sin"
+        if epithet != "[N/A]": epithet = f"\"{epithet}\""
         else: epithet = ""
         fullName = full(aspect_key)
         html_content += f"""
@@ -202,6 +204,7 @@ def genAspect(aspectAlignment):
                         Superpower: {escape(power)}<br>
                         Gear-Colour: {escape(colour)}<br>
                         Weapon: {escape(weapon)}<br>
+                        Inverse {escape(inverseAspect.capitalize())}
                     </p>
                 </div>
             </section>
