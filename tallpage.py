@@ -188,7 +188,7 @@ def genAspect(aspectAlignment):
         colour = setData('colour')
         weapon = setData('weapon')
         epithet = setData('epithet')
-        if aspect_key == "sin": inverseAspect = "virtue"
+        if aspectAlignment == "sin": inverseAspect = "virtue"
         else: inverseAspect = "sin"
         if epithet != "[N/A]": epithet = f"\"{epithet}\""
         else: epithet = ""
