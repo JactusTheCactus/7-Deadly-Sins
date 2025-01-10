@@ -50,24 +50,16 @@ def get_gendered_rank(rank, sex):
         return rank
 def yaml_to_html(yaml_data, aspect_key, html_file):
     aspect_data = yaml_data.get(aspect_key, {})
+    epithet = safe_escape(aspect_data.get("epithet",""))
     inverse = safe_escape(aspect_data.get("inverse",""))
-    if inverse == "" or inverse is None: inverse = "[Inverse]"
     alignment = safe_escape(aspect_data.get("alignment",""))
-    if alignment == "" or alignment is None: alignment = "[Alignment]"
     name = safe_escape(aspect_data.get("name",""))
-    if name == "" or name is None: name = "[NAME]"
     animal = safe_escape(aspect_data.get("animal",""))
-    if animal == "" or animal is None: animal = "[ANIMAL]"
     aspect = safe_escape(aspect_data.get("aspect",""))
-    if aspect == "" or aspect is None: aspect = "[ASPECT]"
     weapon = safe_escape(aspect_data.get("weapon",""))
-    if weapon == "" or weapon is None: weapon = "[WEAPON]"
     colour = safe_escape(aspect_data.get("colour",""))
-    if colour == "" or colour is None: colour = "[COLOUR]"
     power = safe_escape(aspect_data.get("power",""))
-    if power == "" or power is None: power = "[POWER]"
     species = safe_escape(aspect_data.get("species",""))
-    if species == "" or species is None: species = "[SPECIES]"
     sex = safe_escape(aspect_data.get("sex",""))
     if sex == "f": pronouns = ["she", "her", "hers"]
     elif sex == "m": pronouns = ["he", "him", "his"]
