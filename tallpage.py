@@ -124,11 +124,11 @@ def full(aspect_key):
             name = data[aspect_key]['name']
         rank = f"{data[aspect_key]['rank']}"
         animal = f"{data[aspect_key]['animal']}"
-        aspect = f"{data[aspect_key]['aspect']}"
+        aspect = f" {data[aspect_key]['aspect']}"
         aspectTitle = title(aspect_key)
         alignment = data[aspect_key]['alignment']
         if animal == "None":
-            fullaspect = f"{alignment} of {aspect}"
+            fullaspect = f"{alignment} of{aspect}"
         else:
             fullaspect = f"{animal} {alignment} of {aspect}"
         fullName = f"{aspectTitle}, {fullaspect}"
