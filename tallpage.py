@@ -113,9 +113,9 @@ def title(aspect):
     rank = data[aspect]['rank']
     if rank is None:
         rank = ""
-    rank = f" {rank}"
     sex = data[aspect]['sex']
     rank = get_gendered_rank(rank,sex)
+    rank = f" {rank}"
     title = f"{name}{rank}"
     return title
 def full(aspect_key):
