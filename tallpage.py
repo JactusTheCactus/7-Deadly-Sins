@@ -210,8 +210,8 @@ def genAspect(aspectAlignment):
         colour = setData('colour')
         weapon = setData('weapon')
         epithet = setData('epithet')
-        if epithet != "[N/A]":
-            epithet = f"\"{epithet}\""
+        if epithet != '[N/A]': epithet = f"\"{epithet}\""
+        else: epithet = ""
         fullName = full(aspect_key)
         html_content += f"""
             <section id="{escape(aspect_key)}" class="wrapper">
