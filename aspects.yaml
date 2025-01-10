@@ -10,6 +10,7 @@ envy:
   rank: Imperatore
   alignment: Sin
   inverse: kindness
+  epithet:
 gluttony:
   name: Gula
   animal: Hydra
@@ -22,6 +23,7 @@ gluttony:
   rank: Venatorium
   alignment: Sin
   inverse: temperance
+  epithet:
 greed:
   name: Avaritia
   animal: Dragon
@@ -34,6 +36,7 @@ greed:
   rank: Ferratorium
   alignment: Sin
   inverse: charity
+  epithet:
 lust:
   name: Luxuria
   animal: Siren
@@ -46,6 +49,7 @@ lust:
   rank: Dominum
   alignment: Sin
   inverse: chastity
+  epithet:
 pride:
   name: Superbia
   animal: Phoenix
@@ -58,6 +62,7 @@ pride:
   rank: Luminorium
   alignment: Sin
   inverse: humility
+  epithet:
 sloth:
   name: Acedia
   animal: Sphinx
@@ -70,6 +75,7 @@ sloth:
   rank: Exaltum
   alignment: Sin
   inverse: diligence
+  epithet:
 wrath:
   name: Ira
   animal: Kraken
@@ -82,6 +88,7 @@ wrath:
   rank: Bellatorium
   alignment: Sin
   inverse: patience
+  epithet: The Midnight Dawn
 charity:
   name: Caritas
   animal:
@@ -94,6 +101,7 @@ charity:
   rank:
   alignment: Virtue
   inverse: greed
+  epithet:
 chastity:
   name: Castitas
   animal:
@@ -106,6 +114,7 @@ chastity:
   rank:
   alignment: Virtue
   inverse: lust
+  epithet:
 diligence:
   name: Diligentia
   animal:
@@ -118,6 +127,7 @@ diligence:
   rank:
   alignment: Virtue
   inverse: sloth
+  epithet:
 kindness:
   name: Humanitas
   animal:
@@ -130,6 +140,7 @@ kindness:
   rank:
   alignment: Virtue
   inverse: envy
+  epithet:
 humility:
   name: Humilitas
   animal:
@@ -142,6 +153,7 @@ humility:
   rank:
   alignment: Virtue
   inverse: pride
+  epithet:
 patience:
   name: Patientia
   animal:
@@ -154,6 +166,7 @@ patience:
   rank:
   alignment: Virtue
   inverse: wrath
+  epithet:
 temperance:
   name: Temperantia
   animal:
@@ -166,3 +179,4 @@ temperance:
   rank:
   alignment: Virtue
   inverse: gluttony
+  epithet:

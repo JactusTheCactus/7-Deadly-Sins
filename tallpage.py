@@ -104,11 +104,14 @@ def full(aspect_key):
     aspect = f" {data[aspect_key]['aspect']}"
     aspectTitle = title(aspect_key)
     alignment = data[aspect_key]['alignment']
+    epithet = data[aspect_key]['epithet']
     if animal == "None":
         fullaspect = f"{alignment} of{aspect}"
     else:
         fullaspect = f"{animal} {alignment} of {aspect}"
     fullName = f"{aspectTitle}, {fullaspect}"
+    if epithet is not None:
+        fullName += f", '{epithet}'"
     return fullName
 
 sinList = [
