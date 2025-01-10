@@ -111,11 +111,11 @@ for aspect in data.keys():
 def title(aspect):
     name = data[aspect]['name']
     rank = data[aspect]['rank']
-    if rank is None:
+    rank = f" {rank}"
+    if rank == " None":
         rank = ""
     sex = data[aspect]['sex']
     rank = get_gendered_rank(rank,sex)
-    rank = f" {rank}"
     title = f"{name}{rank}"
     return title
 def full(aspect_key):
