@@ -48,22 +48,8 @@ def get_gendered_rank(rank, sex):
     else:
         # For neutral, just return rank as is
         return rank
-def yaml_to_html(yaml_data, aspect_key, html_file):
+def yaml_to_html(yaml_data, aspect_key):
     aspect_data = yaml_data.get(aspect_key, {})
-    epithet = safe_escape(aspect_data.get("epithet",""))
-    inverse = safe_escape(aspect_data.get("inverse",""))
-    alignment = safe_escape(aspect_data.get("alignment",""))
-    name = safe_escape(aspect_data.get("name",""))
-    animal = safe_escape(aspect_data.get("animal",""))
-    aspect = safe_escape(aspect_data.get("aspect",""))
-    weapon = safe_escape(aspect_data.get("weapon",""))
-    colour = safe_escape(aspect_data.get("colour",""))
-    power = safe_escape(aspect_data.get("power",""))
-    species = safe_escape(aspect_data.get("species",""))
-    sex = safe_escape(aspect_data.get("sex",""))
-    if sex == "f": pronouns = ["she", "her", "hers"]
-    elif sex == "m": pronouns = ["he", "him", "his"]
-    else: pronouns = ["they", "them", "theirs"]
     rank = safe_escape(aspect_data.get("rank",""))
     if rank == "" or rank is None: rank = "[RANK]"
     def title(aspect_key):
@@ -89,7 +75,6 @@ def yaml_to_html(yaml_data, aspect_key, html_file):
         else:
             name = data[aspect_key]['name']
         name = f"{name}"
-        rank = f"{data[aspect_key]['rank']}"
         animal = f"{data[aspect_key]['animal']}"
         aspect = f"{data[aspect_key]['aspect']}"
         aspectTitle = title(aspect_key)
@@ -102,7 +87,7 @@ with open(yaml_file, 'r', encoding='utf-8') as f:
     data = yaml.safe_load(f)
 for aspect in data.keys():
     html_file = f"{aspect}.html"
-    yaml_to_html(data, aspect, html_file)
+    yaml_to_html(data, aspect)
 def title(aspect):
     name = data[aspect]['name']
     rank = data[aspect]['rank']
@@ -115,7 +100,6 @@ def title(aspect):
     # test(title)
     return title
 def full(aspect_key):
-    rank = f"{data[aspect_key]['rank']}"
     animal = f"{data[aspect_key]['animal']}"
     aspect = f" {data[aspect_key]['aspect']}"
     aspectTitle = title(aspect_key)
