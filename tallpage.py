@@ -3,6 +3,9 @@ import os
 from html import escape
 import re
 from pathlib import Path
+
+def test(x):
+    print(f"|{x}|")
 # Function to ensure the value is not None before escaping
 def safe_escape(value):
     if value is None:
@@ -111,25 +114,26 @@ for aspect in data.keys():
 def title(aspect):
     name = data[aspect]['name']
     rank = data[aspect]['rank']
-    rank = f" {rank}"
-    if rank == " None":
-        rank = ""
     sex = data[aspect]['sex']
-    rank = get_gendered_rank(rank,sex)
+    if sex is None: pass
+    else: rank = get_gendered_rank(rank,sex)
+    if rank is None: rank = ""
+    else: rank = f" {rank}"
     title = f"{name}{rank}"
+    # test(title)
     return title
 def full(aspect_key):
-        rank = f"{data[aspect_key]['rank']}"
-        animal = f"{data[aspect_key]['animal']}"
-        aspect = f" {data[aspect_key]['aspect']}"
-        aspectTitle = title(aspect_key)
-        alignment = data[aspect_key]['alignment']
-        if animal == "None":
-            fullaspect = f"{alignment} of{aspect}"
-        else:
-            fullaspect = f"{animal} {alignment} of {aspect}"
-        fullName = f"{aspectTitle}, {fullaspect}"
-        return fullName
+    rank = f"{data[aspect_key]['rank']}"
+    animal = f"{data[aspect_key]['animal']}"
+    aspect = f" {data[aspect_key]['aspect']}"
+    aspectTitle = title(aspect_key)
+    alignment = data[aspect_key]['alignment']
+    if animal == "None":
+        fullaspect = f"{alignment} of{aspect}"
+    else:
+        fullaspect = f"{animal} {alignment} of {aspect}"
+    fullName = f"{aspectTitle}, {fullaspect}"
+    return fullName
 
 sinList = [
     "envy",
