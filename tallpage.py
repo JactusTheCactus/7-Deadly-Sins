@@ -210,15 +210,15 @@ def genAspect(aspectAlignment):
         colour = setData('colour')
         weapon = setData('weapon')
         epithet = setData('epithet')
-        
-        fullName = full(aspect_key)
         if epithet != "[N/A]":
-            fullName += f"<br>\"{epithet}\""
+            epithet = f"\"{epithet}\""
+        fullName = full(aspect_key)
         html_content += f"""
             <section id="{escape(aspect_key)}" class="wrapper">
                 <div class="inner">
                     <h1 class="major">
-                        {escape(fullName)}
+                        {escape(fullName)}<br>
+                        {escape(epithet)}
                     </h1>
                         Species: {escape(species)}<br>
                         Superpower: {escape(power)}<br>
